@@ -15,7 +15,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Qj2-cZ-vBV">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="豆瓣fm-豆瓣电台-16" translatesAutoresizingMaskIntoConstraints="NO" id="Qj2-cZ-vBV">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="320"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="Qj2-cZ-vBV" secondAttribute="height" multiplier="1:1" id="yea-HH-9tL"/>
@@ -25,21 +25,29 @@
                     <rect key="frame" x="8" y="297" width="234" height="2"/>
                 </progressView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HYe-KM-Q84">
-                    <rect key="frame" x="260" y="287" width="43" height="21"/>
+                    <rect key="frame" x="260" y="287" width="43" height="20.5"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="5aL-ly-5J5">
+                    <rect key="frame" x="0.0" y="328" width="320" height="274"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </tableView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
+                <constraint firstItem="5aL-ly-5J5" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="42h-WF-nlJ"/>
                 <constraint firstItem="HYe-KM-Q84" firstAttribute="leading" secondItem="Qj2-cZ-vBV" secondAttribute="trailing" constant="-60" id="B1e-r7-BK6"/>
                 <constraint firstItem="HYe-KM-Q84" firstAttribute="top" secondItem="Qj2-cZ-vBV" secondAttribute="bottom" constant="-33" id="BmT-FX-VgB"/>
                 <constraint firstItem="HYe-KM-Q84" firstAttribute="centerY" secondItem="2bj-xO-NR4" secondAttribute="centerY" constant="-0.5" id="ChV-pm-3rf"/>
                 <constraint firstItem="Qj2-cZ-vBV" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="I0x-mf-n7k"/>
                 <constraint firstItem="Qj2-cZ-vBV" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="I5t-ZG-ar3"/>
+                <constraint firstAttribute="bottom" secondItem="5aL-ly-5J5" secondAttribute="bottom" constant="-34" id="LZO-gZ-ajb"/>
+                <constraint firstAttribute="trailing" secondItem="5aL-ly-5J5" secondAttribute="trailing" id="WNe-Dg-vMM"/>
                 <constraint firstItem="HYe-KM-Q84" firstAttribute="trailing" secondItem="2bj-xO-NR4" secondAttribute="trailing" constant="61" id="crA-cM-e9E"/>
                 <constraint firstAttribute="trailing" secondItem="HYe-KM-Q84" secondAttribute="trailing" constant="17" id="dt0-Jg-OFO"/>
+                <constraint firstItem="5aL-ly-5J5" firstAttribute="top" secondItem="Qj2-cZ-vBV" secondAttribute="bottom" constant="8" id="gQn-Py-0Oi"/>
                 <constraint firstAttribute="trailing" secondItem="Qj2-cZ-vBV" secondAttribute="trailing" id="tdO-Mz-eyH"/>
                 <constraint firstItem="Qj2-cZ-vBV" firstAttribute="leading" secondItem="2bj-xO-NR4" secondAttribute="leading" constant="-8" id="yiy-zb-YWT"/>
             </constraints>
@@ -47,4 +55,7 @@
             <point key="canvasLocation" x="356" y="287"/>
         </view>
     </objects>
+    <resources>
+        <image name="豆瓣fm-豆瓣电台-16" width="535" height="535"/>
+    </resources>
 </document>
