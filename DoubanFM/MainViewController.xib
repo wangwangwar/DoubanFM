@@ -7,6 +7,10 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MainViewController">
             <connections>
+                <outlet property="imageView" destination="Qj2-cZ-vBV" id="PwF-Pq-djQ"/>
+                <outlet property="progressBar" destination="2bj-xO-NR4" id="TLZ-rw-8Eb"/>
+                <outlet property="songTable" destination="5aL-ly-5J5" id="peq-Ud-z7B"/>
+                <outlet property="timeLabel" destination="HYe-KM-Q84" id="ahr-uH-2cV"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>

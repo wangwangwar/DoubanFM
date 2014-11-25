@@ -16,6 +16,8 @@
 		611F12D31A24507E001FE5D9 /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 611F12D11A24507E001FE5D9 /* MainViewController.xib */; };
 		611F12D81A245654001FE5D9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 611F12D41A245654001FE5D9 /* Main.storyboard */; };
 		611F12DC1A2456BF001FE5D9 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 611F12DB1A2456BF001FE5D9 /* ViewController.m */; };
+		611F12E11A245CBA001FE5D9 /* SongsTableDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 611F12E01A245CBA001FE5D9 /* SongsTableDataSource.m */; };
+		611F12E41A2466C5001FE5D9 /* ChannelsTableDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 611F12E31A2466C5001FE5D9 /* ChannelsTableDataSource.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +47,10 @@
 		611F12D51A245654001FE5D9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = DoubanFM/Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		611F12DA1A2456BF001FE5D9 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		611F12DB1A2456BF001FE5D9 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		611F12DF1A245CBA001FE5D9 /* SongsTableDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SongsTableDataSource.h; sourceTree = "<group>"; };
+		611F12E01A245CBA001FE5D9 /* SongsTableDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SongsTableDataSource.m; sourceTree = "<group>"; };
+		611F12E21A2466C5001FE5D9 /* ChannelsTableDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChannelsTableDataSource.h; sourceTree = "<group>"; };
+		611F12E31A2466C5001FE5D9 /* ChannelsTableDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChannelsTableDataSource.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +99,10 @@
 				611F12AE1A244FC4001FE5D9 /* AppDelegate.m */,
 				611F12CF1A24507E001FE5D9 /* MainViewController.h */,
 				611F12D01A24507E001FE5D9 /* MainViewController.m */,
+				611F12DF1A245CBA001FE5D9 /* SongsTableDataSource.h */,
+				611F12E01A245CBA001FE5D9 /* SongsTableDataSource.m */,
+				611F12E21A2466C5001FE5D9 /* ChannelsTableDataSource.h */,
+				611F12E31A2466C5001FE5D9 /* ChannelsTableDataSource.m */,
 				611F12D11A24507E001FE5D9 /* MainViewController.xib */,
 				611F12B61A244FC4001FE5D9 /* Images.xcassets */,
 				611F12B81A244FC4001FE5D9 /* LaunchScreen.xib */,
@@ -229,9 +239,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				611F12AF1A244FC4001FE5D9 /* AppDelegate.m in Sources */,
+				611F12E11A245CBA001FE5D9 /* SongsTableDataSource.m in Sources */,
 				611F12AC1A244FC4001FE5D9 /* main.m in Sources */,
 				611F12DC1A2456BF001FE5D9 /* ViewController.m in Sources */,
 				611F12D21A24507E001FE5D9 /* MainViewController.m in Sources */,
+				611F12E41A2466C5001FE5D9 /* ChannelsTableDataSource.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

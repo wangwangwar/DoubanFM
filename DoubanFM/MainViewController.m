@@ -7,8 +7,15 @@
 //
 
 #import "MainViewController.h"
+#import "SongsTableDataSource.h"
 
 @interface MainViewController ()
+
+@property (weak, nonatomic) IBOutlet UIImageView *imageView;
+@property (weak, nonatomic) IBOutlet UILabel *timeLabel;
+@property (weak, nonatomic) IBOutlet UIProgressView *progressBar;
+@property (weak, nonatomic) IBOutlet UITableView *songTable;
+@property (nonatomic) SongsTableDataSource *sds;
 
 @end
 
@@ -16,22 +23,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+    
+    [self.songTable registerClass:[UITableViewCell class]
+           forCellReuseIdentifier:@"SongCell"];
+    
+    self.sds = [[SongsTableDataSource alloc] init];
+    self.songTable.dataSource = self.sds;
 }
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
