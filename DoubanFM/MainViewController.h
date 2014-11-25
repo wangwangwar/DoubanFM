@@ -6,8 +6,8 @@
 //  Copyright (c) 2014年 wangwangwar. All rights reserved.
 //
 
-#import "ViewController.h"
+#import <UIKit/UIKit.h>
 
-@interface MainViewController : ViewController
+@interface MainViewController : UIViewController
 
 @end
