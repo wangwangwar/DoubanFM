@@ -28,14 +28,15 @@
         _session = [NSURLSession sessionWithConfiguration:config
                                                  delegate:nil
                                             delegateQueue:nil];
-        _songs = @[@1, @2, @3];
+        _channelId = 0;
     }
 
     return self;
 }
 
-- (void)getSongsByChannel:(NSUInteger)channel {
-    NSURL *url = [NSURL URLWithString:@"http://www.douban.com/j/app/radio/channels"];
+- (void)getSongs {
+    NSString *urlString = [NSString stringWithFormat:@"http://www.douban.com/j/app/radio/people?version=100&app_name=radio_desktop_win&type=n&channel=%lu", self.channelId];
+    NSURL *url = [NSURL URLWithString:urlString];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     
     NSURLSessionDataTask *dataTask =
@@ -45,6 +46,10 @@
                                                                                  options:0
                                                                                    error:nil];
                         NSLog(@"%@", channels);
+                        
+                        if (self.completionHandler) {
+                            self.completionHandler();
+                        }
                     }];
     [dataTask resume];
 }

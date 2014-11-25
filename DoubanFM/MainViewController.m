@@ -27,8 +27,16 @@
     [self.songTable registerClass:[UITableViewCell class]
            forCellReuseIdentifier:@"SongCell"];
     
+    // Set song table view data source
     self.sds = [[SongsTableDataSource alloc] init];
+    UITableView *tv = self.songTable;
+    self.sds.completionHandler = ^{
+        NSLog(@"Completioin Handler");
+        [tv reloadData];
+    };
     self.songTable.dataSource = self.sds;
+    
+    [self.sds getSongs];
 }
 
 @end
