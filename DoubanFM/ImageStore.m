@@ -52,7 +52,10 @@
                     completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
                         UIImage *image = [UIImage imageWithData:data];
                         self.privateImages[urlString] = image;
-                        completionHandler(image);
+                        
+                        if (completionHandler) {
+                            completionHandler(image);
+                        }
                     }
      ];
     [dataTask resume];
