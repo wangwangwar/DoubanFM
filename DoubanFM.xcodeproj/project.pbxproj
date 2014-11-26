@@ -95,15 +95,11 @@
 		611F12A81A244FC4001FE5D9 /* DoubanFM */ = {
 			isa = PBXGroup;
 			children = (
-				617570E71A25E222003AF0A7 /* utils */,
-				617570E61A25E205003AF0A7 /* datasources */,
-				617570E51A25E1E7003AF0A7 /* controllers */,
-				611F12DA1A2456BF001FE5D9 /* ViewController.h */,
-				611F12DB1A2456BF001FE5D9 /* ViewController.m */,
-				611F12D41A245654001FE5D9 /* Main.storyboard */,
+				617570E71A25E222003AF0A7 /* Utils */,
+				617570E61A25E205003AF0A7 /* DataSources */,
+				617570E51A25E1E7003AF0A7 /* Controllers */,
 				611F12AD1A244FC4001FE5D9 /* AppDelegate.h */,
 				611F12AE1A244FC4001FE5D9 /* AppDelegate.m */,
-				611F12D11A24507E001FE5D9 /* MainViewController.xib */,
 				611F12E21A2466C5001FE5D9 /* ChannelsTableDataSource.h */,
 				611F12E31A2466C5001FE5D9 /* ChannelsTableDataSource.m */,
 				611F12B61A244FC4001FE5D9 /* Images.xcassets */,
@@ -139,31 +135,51 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		617570E51A25E1E7003AF0A7 /* controllers */ = {
+		617570E51A25E1E7003AF0A7 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				611F12CF1A24507E001FE5D9 /* MainViewController.h */,
-				611F12D01A24507E001FE5D9 /* MainViewController.m */,
+				617570EC1A25F970003AF0A7 /* NoUse */,
+				617570EB1A25F93C003AF0A7 /* MainViewController */,
 			);
-			name = controllers;
+			name = Controllers;
 			sourceTree = "<group>";
 		};
-		617570E61A25E205003AF0A7 /* datasources */ = {
+		617570E61A25E205003AF0A7 /* DataSources */ = {
 			isa = PBXGroup;
 			children = (
 				611F12DF1A245CBA001FE5D9 /* SongsTableDataSource.h */,
 				611F12E01A245CBA001FE5D9 /* SongsTableDataSource.m */,
 			);
-			name = datasources;
+			name = DataSources;
 			sourceTree = "<group>";
 		};
-		617570E71A25E222003AF0A7 /* utils */ = {
+		617570E71A25E222003AF0A7 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
 				617570E81A25E23F003AF0A7 /* ImageStore.h */,
 				617570E91A25E23F003AF0A7 /* ImageStore.m */,
 			);
-			name = utils;
+			name = Utils;
+			sourceTree = "<group>";
+		};
+		617570EB1A25F93C003AF0A7 /* MainViewController */ = {
+			isa = PBXGroup;
+			children = (
+				611F12D11A24507E001FE5D9 /* MainViewController.xib */,
+				611F12CF1A24507E001FE5D9 /* MainViewController.h */,
+				611F12D01A24507E001FE5D9 /* MainViewController.m */,
+			);
+			name = MainViewController;
+			sourceTree = "<group>";
+		};
+		617570EC1A25F970003AF0A7 /* NoUse */ = {
+			isa = PBXGroup;
+			children = (
+				611F12DA1A2456BF001FE5D9 /* ViewController.h */,
+				611F12DB1A2456BF001FE5D9 /* ViewController.m */,
+				611F12D41A245654001FE5D9 /* Main.storyboard */,
+			);
+			name = NoUse;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
