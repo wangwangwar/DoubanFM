@@ -42,11 +42,10 @@
     NSURLSessionDataTask *dataTask =
     [self.session dataTaskWithRequest:request
                     completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-                        NSDictionary *channels = [NSJSONSerialization JSONObjectWithData:data
-                                                                                 options:0
-                                                                                   error:nil];
-                        NSLog(@"%@", channels);
-                        
+                        NSDictionary *songsData = [NSJSONSerialization JSONObjectWithData:data
+                                                                                  options:0
+                                                                                    error:nil];
+                        self.songs = songsData[@"song"];
                         if (self.completionHandler) {
                             self.completionHandler();
                         }
@@ -54,15 +53,17 @@
     [dataTask resume];
 }
 
+#pragma mark - Table data source
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return [self.songs count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSLog(@"aa");
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SongCell"
                                                             forIndexPath:indexPath];
-    cell.textLabel.text = @"AAA";
+    NSDictionary *song = self.songs[indexPath.row];
+    cell.textLabel.text = song[@"title"];
     
     return cell;
 }
