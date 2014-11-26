@@ -99,11 +99,11 @@
 				611F12AE1A244FC4001FE5D9 /* AppDelegate.m */,
 				611F12CF1A24507E001FE5D9 /* MainViewController.h */,
 				611F12D01A24507E001FE5D9 /* MainViewController.m */,
+				611F12D11A24507E001FE5D9 /* MainViewController.xib */,
 				611F12DF1A245CBA001FE5D9 /* SongsTableDataSource.h */,
 				611F12E01A245CBA001FE5D9 /* SongsTableDataSource.m */,
 				611F12E21A2466C5001FE5D9 /* ChannelsTableDataSource.h */,
 				611F12E31A2466C5001FE5D9 /* ChannelsTableDataSource.m */,
-				611F12D11A24507E001FE5D9 /* MainViewController.xib */,
 				611F12B61A244FC4001FE5D9 /* Images.xcassets */,
 				611F12B81A244FC4001FE5D9 /* LaunchScreen.xib */,
 				611F12A91A244FC4001FE5D9 /* Supporting Files */,
@@ -435,6 +435,7 @@
 				611F12CB1A244FC4001FE5D9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		611F12CC1A244FC4001FE5D9 /* Build configuration list for PBXNativeTarget "DoubanFMTests" */ = {
 			isa = XCConfigurationList;
@@ -443,6 +444,7 @@
 				611F12CE1A244FC4001FE5D9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

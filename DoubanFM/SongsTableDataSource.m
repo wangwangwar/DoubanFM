@@ -10,7 +10,6 @@
 
 @interface SongsTableDataSource ()
 
-@property (nonatomic) NSArray *songs;
 @property (nonatomic) NSURLSession *session;
 
 @end
@@ -46,6 +45,7 @@
                                                                                   options:0
                                                                                     error:nil];
                         self.songs = songsData[@"song"];
+                        NSLog(@"%@", self.songs);
                         if (self.completionHandler) {
                             self.completionHandler();
                         }

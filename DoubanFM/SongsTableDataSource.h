@@ -10,6 +10,7 @@
 
 @interface SongsTableDataSource : NSObject <UITableViewDataSource>
 
+@property (nonatomic) NSArray *songs;
 @property (nonatomic) NSUInteger channelId;
 @property (nonatomic, strong) void (^completionHandler)();
 
