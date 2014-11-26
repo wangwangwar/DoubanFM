@@ -12,8 +12,7 @@
 
 @property (nonatomic) NSArray *songs;
 @property (nonatomic) NSUInteger channelId;
-@property (nonatomic, strong) void (^completionHandler)();
 
-- (void)getSongs;
+- (void)getSongsWithCompletionHandler:(void (^)())completionHandler;
 
 @end

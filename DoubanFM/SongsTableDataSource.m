@@ -7,6 +7,7 @@
 //
 
 #import "SongsTableDataSource.h"
+#import "ImageStore.h"
 
 @interface SongsTableDataSource ()
 
@@ -33,8 +34,8 @@
     return self;
 }
 
-- (void)getSongs {
-    NSString *urlString = [NSString stringWithFormat:@"http://www.douban.com/j/app/radio/people?version=100&app_name=radio_desktop_win&type=n&channel=%lu", self.channelId];
+- (void)getSongsWithCompletionHandler:(void (^)())completionHandler {
+    NSString *urlString = [NSString stringWithFormat:@"http://www.douban.com/j/app/radio/people?version=100&app_name=radio_desktop_win&type=n&channel=%lu", (unsigned long)self.channelId];
     NSURL *url = [NSURL URLWithString:urlString];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     
@@ -46,11 +47,23 @@
                                                                                     error:nil];
                         self.songs = songsData[@"song"];
                         NSLog(@"%@", self.songs);
-                        if (self.completionHandler) {
-                            self.completionHandler();
+                        
+                        if (completionHandler) {
+                            completionHandler();
                         }
+                        
+                        // Preload Album Images
+                        [self preloadImages];
                     }];
     [dataTask resume];
+}
+
+- (void)preloadImages {
+    for (NSDictionary *song in self.songs) {
+        NSString *imgURLString = song[@"picture"];
+        [[ImageStore sharedStore] loadImageByURLString:imgURLString
+                                     completionHandler:nil];
+    }
 }
 
 #pragma mark - Table data source
