@@ -46,10 +46,12 @@
                                                                                   options:0
                                                                                     error:nil];
                         self.songs = songsData[@"song"];
-                        NSLog(@"%@", self.songs);
                         
                         if (completionHandler) {
-                            completionHandler();
+                            // View related operations must execute in main queue!
+                            dispatch_sync(dispatch_get_main_queue(), ^{
+                                completionHandler();
+                            });
                         }
                         
                         // Preload Album Images
