@@ -10,6 +10,7 @@
 #import "MainViewController.h"
 #import "SongsTableDataSource.h"
 #import "ImageStore.h"
+#import "Time.h"
 
 @interface MainViewController () <UITableViewDelegate>
 
@@ -19,6 +20,7 @@
 @property (weak, nonatomic) IBOutlet UITableView *songTable;
 @property (nonatomic) SongsTableDataSource *sds;
 @property (nonatomic) AVPlayer *player;
+@property (nonatomic) NSTimer *timer;
 
 @end
 
@@ -49,6 +51,14 @@
     NSLog(@"Play");
     self.player = [[AVPlayer alloc] initWithURL:url];
     [self.player play];
+    
+    // Set time label update timer
+    [self.timer invalidate];
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:0.3
+                                                      target:self
+                                                    selector:@selector(updateTimeLabel:)
+                                                    userInfo:nil
+                                                     repeats:YES];
 }
 
 - (void)setImageByURLString:(NSString *)urlString {
@@ -67,4 +77,9 @@
     [self playMusicByURL:songUrl];
 }
 
+#pragma mark - Actions
+
+- (void)updateTimeLabel:(id)sender {
+    self.timeLabel.text = [Time timeStringWithCMTime:self.player.currentTime];
+}
 @end

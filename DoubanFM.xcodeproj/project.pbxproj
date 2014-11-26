@@ -19,6 +19,7 @@
 		611F12E11A245CBA001FE5D9 /* SongsTableDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 611F12E01A245CBA001FE5D9 /* SongsTableDataSource.m */; };
 		611F12E41A2466C5001FE5D9 /* ChannelsTableDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 611F12E31A2466C5001FE5D9 /* ChannelsTableDataSource.m */; };
 		617570EA1A25E23F003AF0A7 /* ImageStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 617570E91A25E23F003AF0A7 /* ImageStore.m */; };
+		617570EF1A260098003AF0A7 /* Time.m in Sources */ = {isa = PBXBuildFile; fileRef = 617570EE1A260098003AF0A7 /* Time.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +55,8 @@
 		611F12E31A2466C5001FE5D9 /* ChannelsTableDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChannelsTableDataSource.m; sourceTree = "<group>"; };
 		617570E81A25E23F003AF0A7 /* ImageStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageStore.h; sourceTree = "<group>"; };
 		617570E91A25E23F003AF0A7 /* ImageStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageStore.m; sourceTree = "<group>"; };
+		617570ED1A260098003AF0A7 /* Time.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Time.h; sourceTree = "<group>"; };
+		617570EE1A260098003AF0A7 /* Time.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Time.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -158,6 +161,8 @@
 			children = (
 				617570E81A25E23F003AF0A7 /* ImageStore.h */,
 				617570E91A25E23F003AF0A7 /* ImageStore.m */,
+				617570ED1A260098003AF0A7 /* Time.h */,
+				617570EE1A260098003AF0A7 /* Time.m */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -283,6 +288,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				617570EF1A260098003AF0A7 /* Time.m in Sources */,
 				611F12AF1A244FC4001FE5D9 /* AppDelegate.m in Sources */,
 				617570EA1A25E23F003AF0A7 /* ImageStore.m in Sources */,
 				611F12E11A245CBA001FE5D9 /* SongsTableDataSource.m in Sources */,
