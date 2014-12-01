@@ -8,17 +8,22 @@
 
 #import <AVFoundation/AVFoundation.h>
 #import "MainViewController.h"
-#import "SongsTableDataSource.h"
+#import "ArrayDataSource.h"
+#import "Song.h"
 #import "ImageStore.h"
 #import "Time.h"
+
+NSString *CELL_IDENTIFIER = @"SongCell";
 
 @interface MainViewController () <UITableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 @property (weak, nonatomic) IBOutlet UIProgressView *progressBar;
-@property (weak, nonatomic) IBOutlet UITableView *songTable;
-@property (nonatomic) SongsTableDataSource *sds;
+@property (weak, nonatomic) IBOutlet UITableView *tv;
+
+@property (nonatomic, strong) Song *song;
+@property (nonatomic) ArrayDataSource *ads;
 @property (nonatomic) AVPlayer *player;
 @property (nonatomic) NSTimer *timer;
 
@@ -31,17 +36,27 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self.songTable registerClass:[UITableViewCell class]
-           forCellReuseIdentifier:@"SongCell"];
+    // Register cell identifier for later using
+    [self.tv registerClass:[UITableViewCell class]
+           forCellReuseIdentifier:CELL_IDENTIFIER];
+    
+    // Initial `Song` class
+    _song = [[Song alloc] initWithChannelId:0];
     
     // Set song table view data source
-    self.sds = [[SongsTableDataSource alloc] init];
-    self.songTable.dataSource = self.sds;
-    self.songTable.delegate = self;
+    self.ads = [[ArrayDataSource alloc] initWithItems:_song.songs
+                                       cellIdentifier:CELL_IDENTIFIER
+                                   configureCellBlock:^(UITableViewCell *cell, NSDictionary *song) {
+                                       cell.textLabel.text = song[@"title"];
+                                   }];
+    self.tv.dataSource = self.ads;
     
-    UITableView *tv = self.songTable;
-    [self.sds getSongsWithCompletionHandler:^{
-        [tv reloadData];
+    // Set song table view delegate
+    self.tv.delegate = self;
+    
+    // Refresh song's data
+    [_song getSongsWithCompletionHandler:^{
+        [self.tv reloadData];
     }];
 }
 
@@ -71,7 +86,7 @@
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSDictionary *song = self.sds.songs[indexPath.row];
+    NSDictionary *song = _song.songs[indexPath.row];
     NSURL *songUrl = [NSURL URLWithString:song[@"url"]];
     [self setImageByURLString:song[@"picture"]];
     [self playMusicByURL:songUrl];

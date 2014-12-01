@@ -1,41 +1,56 @@
 //
-//  SongsTableDataSource.m
+//  Song.m
 //  DoubanFM
 //
-//  Created by wangwangwar on 14/11/25.
+//  Created by wangwangwar on 14/12/1.
 //  Copyright (c) 2014年 wangwangwar. All rights reserved.
 //
 
-#import "SongsTableDataSource.h"
+#import "Song.h"
 #import "ImageStore.h"
 
-@interface SongsTableDataSource ()
+
+NSString *SONG_URL = @"http://www.douban.com/j/app/radio/people?version=100&app_name=radio_desktop_win&type=n&channel=%lu";
+
+@interface Song ()
 
 @property (nonatomic) NSURLSession *session;
+@property (nonatomic) NSArray *items;
+@property (nonatomic) NSUInteger channelId;
 
 @end
 
-@implementation SongsTableDataSource
+@implementation Song
 
 #pragma mark - Initialization
 
-- (instancetype)init {
+- (instancetype)initWithChannelId:(NSUInteger)channelId {
     self = [super init];
     if (self) {
+        // Initial network
         NSURLSessionConfiguration *config =
         [NSURLSessionConfiguration defaultSessionConfiguration];
-        
         _session = [NSURLSession sessionWithConfiguration:config
                                                  delegate:nil
                                             delegateQueue:nil];
-        _channelId = 0;
+        
+        // Initial channel
+        _channelId = channelId;
     }
-
+    
     return self;
 }
 
+#pragma mark - Properties
+
+- (NSArray *)songs {
+    return _items;
+}
+
+#pragma mark - Operations
+
 - (void)getSongsWithCompletionHandler:(void (^)())completionHandler {
-    NSString *urlString = [NSString stringWithFormat:@"http://www.douban.com/j/app/radio/people?version=100&app_name=radio_desktop_win&type=n&channel=%lu", (unsigned long)self.channelId];
+    NSString *urlString = [NSString stringWithFormat:SONG_URL, (unsigned long)self.channelId];
     NSURL *url = [NSURL URLWithString:urlString];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     
@@ -66,21 +81,6 @@
         [[ImageStore sharedStore] loadImageByURLString:imgURLString
                                      completionHandler:nil];
     }
-}
-
-#pragma mark - Table data source
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self.songs count];
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SongCell"
-                                                            forIndexPath:indexPath];
-    NSDictionary *song = self.songs[indexPath.row];
-    cell.textLabel.text = song[@"title"];
-    
-    return cell;
 }
 
 @end
