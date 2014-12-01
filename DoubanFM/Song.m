@@ -49,7 +49,7 @@ NSString *SONG_URL = @"http://www.douban.com/j/app/radio/people?version=100&app_
 
 #pragma mark - Operations
 
-- (void)getSongsWithCompletionHandler:(void (^)())completionHandler {
+- (void)refreshWithCompletionBlock:(void (^)())completionBlock {
     NSString *urlString = [NSString stringWithFormat:SONG_URL, (unsigned long)self.channelId];
     NSURL *url = [NSURL URLWithString:urlString];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
@@ -62,10 +62,10 @@ NSString *SONG_URL = @"http://www.douban.com/j/app/radio/people?version=100&app_
                                                                                     error:nil];
                         self.songs = songsData[@"song"];
                         
-                        if (completionHandler) {
+                        if (completionBlock) {
                             // View related operations must execute in main queue!
                             dispatch_sync(dispatch_get_main_queue(), ^{
-                                completionHandler();
+                                completionBlock();
                             });
                         }
                         

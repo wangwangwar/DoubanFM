@@ -55,7 +55,7 @@ NSString *CELL_IDENTIFIER = @"SongCell";
     self.tv.delegate = self;
     
     // Refresh song's data
-    [_song getSongsWithCompletionHandler:^{
+    [_song refreshWithCompletionBlock:^{
         [self.tv reloadData];
     }];
 }

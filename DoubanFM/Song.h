@@ -13,7 +13,7 @@
 @property (nonatomic, strong) NSArray *songs;
 
 - (instancetype)initWithChannelId:(NSUInteger)channelId;
-- (void)getSongsWithCompletionHandler:(void (^)())completionHandler;
+- (void)refreshWithCompletionBlock:(void (^)())completionBlock;
 - (void)preloadImages;
 
 @end
