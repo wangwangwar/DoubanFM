@@ -78,9 +78,9 @@ NSString *CELL_IDENTIFIER = @"SongCell";
 
 - (void)setImageByURLString:(NSString *)urlString {
     [[ImageStore sharedStore] loadImageByURLString:urlString
-                                 completionBlock:^(UIImage *image) {
-                                     self.imageView.image = image;
-                                 }];
+                                   completionBlock:^(UIImage *image) {
+                                       self.imageView.image = image;
+                                   }];
 }
 
 #pragma mark - Table view delegate

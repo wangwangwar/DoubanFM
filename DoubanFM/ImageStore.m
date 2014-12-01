@@ -41,7 +41,7 @@
 #pragma mark - Operations
 
 - (void)loadImageByURLString:(NSString *)urlString
-           completionBlock:(void (^)(UIImage *))completionBlock {
+             completionBlock:(void (^)(UIImage *))completionBlock {
     if (self.privateImages[urlString]) {
         completionBlock(self.privateImages[urlString]);
     }
