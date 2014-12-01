@@ -79,7 +79,7 @@ NSString *SONG_URL = @"http://www.douban.com/j/app/radio/people?version=100&app_
     for (NSDictionary *song in self.songs) {
         NSString *imgURLString = song[@"picture"];
         [[ImageStore sharedStore] loadImageByURLString:imgURLString
-                                     completionHandler:nil];
+                                     completionBlock:nil];
     }
 }
 

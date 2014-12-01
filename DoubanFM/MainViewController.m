@@ -78,7 +78,7 @@ NSString *CELL_IDENTIFIER = @"SongCell";
 
 - (void)setImageByURLString:(NSString *)urlString {
     [[ImageStore sharedStore] loadImageByURLString:urlString
-                                 completionHandler:^(UIImage *image) {
+                                 completionBlock:^(UIImage *image) {
                                      self.imageView.image = image;
                                  }];
 }

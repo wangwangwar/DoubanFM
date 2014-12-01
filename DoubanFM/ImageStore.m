@@ -41,9 +41,9 @@
 #pragma mark - Operations
 
 - (void)loadImageByURLString:(NSString *)urlString
-           completionHandler:(void (^)(UIImage *))completionHandler {
+           completionBlock:(void (^)(UIImage *))completionBlock {
     if (self.privateImages[urlString]) {
-        completionHandler(self.privateImages[urlString]);
+        completionBlock(self.privateImages[urlString]);
     }
 
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:urlString]];
@@ -53,8 +53,8 @@
                         UIImage *image = [UIImage imageWithData:data];
                         self.privateImages[urlString] = image;
                         
-                        if (completionHandler) {
-                            completionHandler(image);
+                        if (completionBlock) {
+                            completionBlock(image);
                         }
                     }
      ];

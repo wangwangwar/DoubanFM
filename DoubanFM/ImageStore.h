@@ -12,6 +12,6 @@
 
 + (instancetype)sharedStore;
 - (void)loadImageByURLString:(NSString *)urlString
-           completionHandler:(void (^)(UIImage *))completionHandler;
+           completionBlock:(void (^)(UIImage *))completionBlock;
 
 @end
