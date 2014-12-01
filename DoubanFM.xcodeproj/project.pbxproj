@@ -80,6 +80,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6115BA9B1A2C9659004C3948 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				617570E81A25E23F003AF0A7 /* ImageStore.h */,
+				617570E91A25E23F003AF0A7 /* ImageStore.m */,
+				6115BA941A2C53A9004C3948 /* Song.h */,
+				6115BA951A2C53A9004C3948 /* Song.m */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
 		611F129D1A244FC4001FE5D9 = {
 			isa = PBXGroup;
 			children = (
@@ -101,6 +112,7 @@
 		611F12A81A244FC4001FE5D9 /* DoubanFM */ = {
 			isa = PBXGroup;
 			children = (
+				6115BA9B1A2C9659004C3948 /* Models */,
 				617570E71A25E222003AF0A7 /* Utils */,
 				617570E61A25E205003AF0A7 /* DataSources */,
 				617570E51A25E1E7003AF0A7 /* Controllers */,
@@ -162,12 +174,8 @@
 		617570E71A25E222003AF0A7 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				617570E81A25E23F003AF0A7 /* ImageStore.h */,
-				617570E91A25E23F003AF0A7 /* ImageStore.m */,
 				617570ED1A260098003AF0A7 /* Time.h */,
 				617570EE1A260098003AF0A7 /* Time.m */,
-				6115BA941A2C53A9004C3948 /* Song.h */,
-				6115BA951A2C53A9004C3948 /* Song.m */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
