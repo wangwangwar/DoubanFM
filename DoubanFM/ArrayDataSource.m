@@ -10,8 +10,8 @@
 
 @interface ArrayDataSource ()
 
+@property (nonatomic) NSArray *items;
 @property (nonatomic, strong) NSString *cellIdentifier;
-@property (nonatomic, strong) NSArray *items;
 @property (nonatomic, strong) void (^configureCell)(id cell, id item);
 
 @end
@@ -35,6 +35,10 @@
 
 #pragma mark - Operations
 
+- (void)setItems:(NSArray *)items {
+    _items = items;
+}
+
 - (id)itemAtIndexPath:(NSIndexPath *)indexPath {
     return self.items[(NSUInteger)indexPath.row];
 }
@@ -48,7 +52,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:_cellIdentifier
                                                             forIndexPath:indexPath];
-    id item = self.items[indexPath.row];
+    id item = [self itemAtIndexPath:indexPath];
     _configureCell(cell, item);
     
     return cell;
