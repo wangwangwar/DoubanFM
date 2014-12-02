@@ -10,6 +10,7 @@
 
 @interface ArrayDataSource : NSObject <UITableViewDataSource>
 
+- (void)setItems:(NSArray *)items;
 - (instancetype)initWithItems:(NSArray *)items
                         cellIdentifier:(NSString *)cellIdentifier
                     configureCellBlock:(void (^)(id cell, id item))configureCell;

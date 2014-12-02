@@ -8,7 +8,7 @@
 
 #import "Song.h"
 #import "ImageStore.h"
-
+#import "ArrayDataSource.h"
 
 NSString *SONG_URL = @"http://www.douban.com/j/app/radio/people?version=100&app_name=radio_desktop_win&type=n&channel=%lu";
 
@@ -49,7 +49,8 @@ NSString *SONG_URL = @"http://www.douban.com/j/app/radio/people?version=100&app_
 
 #pragma mark - Operations
 
-- (void)refreshWithCompletionBlock:(void (^)())completionBlock {
+- (void)refreshWithDataRefreshBlock:(void (^)(NSArray *))dataRefreshBlock
+              completionBlock:(void (^)())completionBlock {
     NSString *urlString = [NSString stringWithFormat:SONG_URL, (unsigned long)self.channelId];
     NSURL *url = [NSURL URLWithString:urlString];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
@@ -60,7 +61,11 @@ NSString *SONG_URL = @"http://www.douban.com/j/app/radio/people?version=100&app_
                         NSDictionary *songsData = [NSJSONSerialization JSONObjectWithData:data
                                                                                   options:0
                                                                                     error:nil];
-                        self.songs = songsData[@"song"];
+                        self.items = songsData[@"song"];
+                        
+                        if (dataRefreshBlock) {
+                            dataRefreshBlock(self.items);
+                        }
                         
                         if (completionBlock) {
                             // View related operations must execute in main queue!

@@ -10,10 +10,11 @@
 
 @interface Song : NSObject
 
-@property (nonatomic, strong) NSArray *songs;
+@property (nonatomic, strong, readonly) NSArray *songs;
 
 - (instancetype)initWithChannelId:(NSUInteger)channelId;
-- (void)refreshWithCompletionBlock:(void (^)())completionBlock;
+- (void)refreshWithDataRefreshBlock:(void (^)(NSArray *))dataRefreshBlock
+                    completionBlock:(void (^)())completionBlock;
 - (void)preloadImages;
 
 @end

@@ -54,8 +54,10 @@ NSString *CELL_IDENTIFIER = @"SongCell";
     // Set song table view delegate
     self.tv.delegate = self;
     
-    // Refresh song's data
-    [_song refreshWithCompletionBlock:^{
+    [_song refreshWithDataRefreshBlock:^(NSArray *songs) {
+        [self.ads setItems:songs];
+    }
+                 completionBlock:^{
         [self.tv reloadData];
     }];
 }
