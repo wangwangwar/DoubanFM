@@ -16,5 +16,6 @@
 - (void)refreshWithDataRefreshBlock:(void (^)(NSArray *))dataRefreshBlock
                     completionBlock:(void (^)())completionBlock;
 - (void)preloadImages;
+- (NSDictionary *)getSongByIndex:(NSInteger)index;
 
 @end

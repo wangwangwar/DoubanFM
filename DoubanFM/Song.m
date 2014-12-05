@@ -62,6 +62,7 @@ NSString *SONG_URL = @"http://www.douban.com/j/app/radio/people?version=100&app_
                                                                                   options:0
                                                                                     error:nil];
                         self.items = songsData[@"song"];
+                        NSLog(@"%@", self.items);
                         
                         if (dataRefreshBlock) {
                             dataRefreshBlock(self.items);
@@ -86,6 +87,13 @@ NSString *SONG_URL = @"http://www.douban.com/j/app/radio/people?version=100&app_
         [[ImageStore sharedStore] loadImageByURLString:imgURLString
                                        completionBlock:nil];
     }
+}
+
+- (NSDictionary *)getSongByIndex:(NSInteger)index {
+    if (index >= [_items count]) {
+        return nil;
+    }
+    return _items[index];
 }
 
 @end
