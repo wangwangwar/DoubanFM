@@ -29,6 +29,7 @@ NSString *CELL_IDENTIFIER = @"SongCell";
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 
 @property (nonatomic, strong) Song *song;
+@property (nonatomic, strong) NSDictionary *currentSong;
 @property (nonatomic) ArrayDataSource *ads;
 @property (nonatomic) AVPlayer *player;
 @property (nonatomic) NSTimer *timer;
@@ -60,11 +61,13 @@ NSString *CELL_IDENTIFIER = @"SongCell";
 - (void)changeSong:(NSDictionary *)song {
     NSLog(@"Change song");
     
+    self.currentSong = song;
+    
     // Set time label update timer
     [self.timer invalidate];
     self.timer = [NSTimer scheduledTimerWithTimeInterval:0.3
                                                       target:self
-                                                    selector:@selector(updateTimeLabel:)
+                                                    selector:@selector(updateAll:)
                                                     userInfo:nil
                                                      repeats:YES];
     
@@ -83,8 +86,17 @@ NSString *CELL_IDENTIFIER = @"SongCell";
 
 #pragma mark - Actions
 
+- (void)updateAll:(id)sender {
+    [self updateTimeLabel:sender];
+    [self updateProgress:sender];
+}
+
 - (void)updateTimeLabel:(id)sender {
     self.timeLabel.text = [Time timeStringWithCMTime:self.player.currentTime];
+}
+
+- (void)updateProgress:(id)sender {
+    _progressBar.progress = [Time secondsWithCMTime:self.player.currentTime] / (double)[self.currentSong[@"length"] intValue];
 }
 
 #pragma mark - Assists

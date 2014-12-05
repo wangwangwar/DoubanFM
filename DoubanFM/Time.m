@@ -15,4 +15,8 @@
     return [[NSString alloc] initWithFormat:@"%02d:%02d", (t / 60), (t % 60)];
 }
 
++ (int)secondsWithCMTime:(CMTime)time {
+    return (int)(time.value / (double)time.timescale);
+}
+
 @end
