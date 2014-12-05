@@ -7,6 +7,7 @@
 //
 
 #import <AVFoundation/AVFoundation.h>
+#import <FXBlurView/FXBlurView.h>
 #import "MainViewController.h"
 #import "ArrayDataSource.h"
 #import "Song.h"
@@ -17,10 +18,15 @@ NSString *CELL_IDENTIFIER = @"SongCell";
 
 @interface MainViewController () <UITableViewDelegate>
 
-@property (weak, nonatomic) IBOutlet UIImageView *imageView;
-@property (weak, nonatomic) IBOutlet UILabel *timeLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *bgImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *albumImageView;
+@property (weak, nonatomic) IBOutlet UILabel *songTitle;
+@property (weak, nonatomic) IBOutlet UILabel *authorAndAlbumName;
 @property (weak, nonatomic) IBOutlet UIProgressView *progressBar;
-@property (weak, nonatomic) IBOutlet UITableView *tv;
+@property (weak, nonatomic) IBOutlet UIButton *playButton;
+@property (weak, nonatomic) IBOutlet UIButton *prevButton;
+@property (weak, nonatomic) IBOutlet UIButton *nextButton;
+@property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 
 @property (nonatomic, strong) Song *song;
 @property (nonatomic) ArrayDataSource *ads;
@@ -36,38 +42,23 @@ NSString *CELL_IDENTIFIER = @"SongCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // Register cell identifier for later using
-    [self.tv registerClass:[UITableViewCell class]
-           forCellReuseIdentifier:CELL_IDENTIFIER];
-    
     // Initial `Song` class
     _song = [[Song alloc] initWithChannelId:0];
     
-    // Set song table view data source
-    self.ads = [[ArrayDataSource alloc] initWithItems:_song.songs
-                                       cellIdentifier:CELL_IDENTIFIER
-                                   configureCellBlock:^(UITableViewCell *cell, NSDictionary *song) {
-                                       cell.textLabel.text = song[@"title"];
-                                   }];
-    self.tv.dataSource = self.ads;
+    // Get songs
+    [_song refreshWithDataRefreshBlock:nil
+                       completionBlock:^{
+                           [self changeSong:[_song getSongByIndex:0]];
+                       }];
     
-    // Set song table view delegate
-    self.tv.delegate = self;
-    
-    [_song refreshWithDataRefreshBlock:^(NSArray *songs) {
-        [self.ads setItems:songs];
-    }
-                 completionBlock:^{
-        [self.tv reloadData];
-    }];
+    // Blur the background image
+    _bgImageView.image = [self getBlurredImage:_bgImageView.image];
 }
 
 #pragma mark - Operations
 
-- (void)playMusicByURL:(NSURL *)url {
-    NSLog(@"Play");
-    self.player = [[AVPlayer alloc] initWithURL:url];
-    [self.player play];
+- (void)changeSong:(NSDictionary *)song {
+    NSLog(@"Change song");
     
     // Set time label update timer
     [self.timer invalidate];
@@ -76,22 +67,18 @@ NSString *CELL_IDENTIFIER = @"SongCell";
                                                     selector:@selector(updateTimeLabel:)
                                                     userInfo:nil
                                                      repeats:YES];
-}
-
-- (void)setImageByURLString:(NSString *)urlString {
-    [[ImageStore sharedStore] loadImageByURLString:urlString
-                                   completionBlock:^(UIImage *image) {
-                                       self.imageView.image = image;
-                                   }];
-}
-
-#pragma mark - Table view delegate
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSDictionary *song = _song.songs[indexPath.row];
-    NSURL *songUrl = [NSURL URLWithString:song[@"url"]];
+    
+    // Set bg and album image
     [self setImageByURLString:song[@"picture"]];
-    [self playMusicByURL:songUrl];
+    
+    // Set song title, singer and album name
+    _songTitle.text = song[@"title"];
+    _authorAndAlbumName.text = [NSString stringWithFormat:@"%@ - %@",
+                                song[@"artist"], song[@"albumtitle"]];
+    
+    // Play!
+    self.player = [[AVPlayer alloc] initWithURL:[NSURL URLWithString:song[@"url"]]];
+    [self.player play];
 }
 
 #pragma mark - Actions
@@ -99,4 +86,21 @@ NSString *CELL_IDENTIFIER = @"SongCell";
 - (void)updateTimeLabel:(id)sender {
     self.timeLabel.text = [Time timeStringWithCMTime:self.player.currentTime];
 }
+
+#pragma mark - Assists
+
+- (UIImage *)getBlurredImage:(UIImage *)image {
+    return [image blurredImageWithRadius:10.0
+                              iterations:5
+                               tintColor:[UIColor blackColor]];
+}
+
+- (void)setImageByURLString:(NSString *)urlString {
+    [[ImageStore sharedStore] loadImageByURLString:urlString
+                                   completionBlock:^(UIImage *image) {
+                                       _bgImageView.image = [self getBlurredImage:image];
+                                       _albumImageView.image = image;
+                                   }];
+}
+
 @end

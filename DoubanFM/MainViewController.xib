@@ -10,8 +10,12 @@
                 <outlet property="albumImageView" destination="jnd-Oh-Zcf" id="guJ-tB-I8Z"/>
                 <outlet property="authorAndAlbumName" destination="VUA-0q-gTR" id="glV-vd-kZ8"/>
                 <outlet property="bgImageView" destination="Qj2-cZ-vBV" id="pma-4s-S1N"/>
+                <outlet property="nextButton" destination="RfI-cj-NWP" id="Dri-Jh-SpH"/>
+                <outlet property="playButton" destination="6Jn-cr-yGf" id="Mlh-1e-PIH"/>
+                <outlet property="prevButton" destination="VtN-0G-EWH" id="7Cz-ft-4Ij"/>
                 <outlet property="progressBar" destination="Mt9-Gy-ANn" id="RnW-bN-yYw"/>
                 <outlet property="songTitle" destination="ZLA-vH-2Pv" id="v6t-NN-MCq"/>
+                <outlet property="timeLabel" destination="7Es-Fm-t0l" id="H3I-hd-vV9"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -42,7 +46,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Mt9-Gy-ANn">
-                    <rect key="frame" x="20" y="401" width="280" height="2"/>
+                    <rect key="frame" x="20" y="401" width="227" height="2"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="2" id="QKa-gY-WPj"/>
                     </constraints>
@@ -83,6 +87,12 @@
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                 </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Es-Fm-t0l" userLabel="time">
+                    <rect key="frame" x="257" y="391.5" width="43" height="20.5"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
@@ -92,6 +102,8 @@
                 <constraint firstItem="RfI-cj-NWP" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="6Jn-cr-yGf" secondAttribute="trailing" constant="25" id="8Ax-eR-snf"/>
                 <constraint firstItem="VtN-0G-EWH" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="60" id="8dg-cG-sIX"/>
                 <constraint firstItem="jnd-Oh-Zcf" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="50" id="A6j-oK-HG9"/>
+                <constraint firstItem="7Es-Fm-t0l" firstAttribute="centerY" secondItem="Mt9-Gy-ANn" secondAttribute="centerY" constant="-0.5" id="BKL-zL-rbi"/>
+                <constraint firstItem="7Es-Fm-t0l" firstAttribute="leading" secondItem="Mt9-Gy-ANn" secondAttribute="trailing" constant="10" id="E2I-ZA-Alg"/>
                 <constraint firstItem="jnd-Oh-Zcf" firstAttribute="top" relation="greaterThanOrEqual" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="80" id="EJg-4B-dRq"/>
                 <constraint firstAttribute="bottom" secondItem="6Jn-cr-yGf" secondAttribute="bottom" constant="60" id="G0N-Si-GOk"/>
                 <constraint firstAttribute="centerX" secondItem="ZLA-vH-2Pv" secondAttribute="centerX" id="LFO-iD-SRA"/>
@@ -104,21 +116,20 @@
                 <constraint firstAttribute="trailing" secondItem="ZLA-vH-2Pv" secondAttribute="trailing" constant="20" id="XBf-CE-TaD"/>
                 <constraint firstItem="Qj2-cZ-vBV" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="YCd-NE-1V5"/>
                 <constraint firstAttribute="bottom" secondItem="Qj2-cZ-vBV" secondAttribute="bottom" id="aoU-5J-tOJ"/>
+                <constraint firstAttribute="trailing" secondItem="7Es-Fm-t0l" secondAttribute="trailing" constant="20" id="edp-iL-LbD"/>
                 <constraint firstItem="VtN-0G-EWH" firstAttribute="centerY" secondItem="RfI-cj-NWP" secondAttribute="centerY" id="h9U-fW-j8V"/>
                 <constraint firstItem="VtN-0G-EWH" firstAttribute="centerY" secondItem="6Jn-cr-yGf" secondAttribute="centerY" id="lHH-ZZ-3oS"/>
-                <constraint firstAttribute="centerX" secondItem="Mt9-Gy-ANn" secondAttribute="centerX" id="lRW-g6-ddN"/>
                 <constraint firstAttribute="centerX" secondItem="VUA-0q-gTR" secondAttribute="centerX" id="nhv-HK-Glm"/>
                 <constraint firstAttribute="centerX" secondItem="6Jn-cr-yGf" secondAttribute="centerX" id="pat-XA-dPW"/>
                 <constraint firstItem="Mt9-Gy-ANn" firstAttribute="top" relation="greaterThanOrEqual" secondItem="VUA-0q-gTR" secondAttribute="bottom" constant="40" id="pzI-T2-v6w"/>
                 <constraint firstAttribute="trailing" secondItem="Qj2-cZ-vBV" secondAttribute="trailing" id="smh-WP-W3x"/>
                 <constraint firstItem="ZLA-vH-2Pv" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="td3-ig-5en"/>
                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="RfI-cj-NWP" secondAttribute="trailing" constant="60" id="wvi-RH-KJa"/>
-                <constraint firstAttribute="trailing" secondItem="Mt9-Gy-ANn" secondAttribute="trailing" constant="20" id="xCg-kS-wup"/>
                 <constraint firstItem="VUA-0q-gTR" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="xKf-T9-uTz"/>
             </constraints>
             <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
-            <point key="canvasLocation" x="208.5" y="354.5"/>
+            <point key="canvasLocation" x="208" y="354"/>
         </view>
     </objects>
     <resources>
