@@ -79,6 +79,9 @@
                     <state key="normal" image="previous">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="prev:" destination="-1" eventType="touchUpInside" id="XIQ-xb-jYC"/>
+                    </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RfI-cj-NWP" userLabel="next">
                     <rect key="frame" x="215" y="455" width="45" height="45"/>
@@ -89,6 +92,9 @@
                     <state key="normal" image="next">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="next:" destination="-1" eventType="touchUpInside" id="12q-z2-dJh"/>
+                    </connections>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Es-Fm-t0l" userLabel="time">
                     <rect key="frame" x="257" y="391.5" width="43" height="20.5"/>

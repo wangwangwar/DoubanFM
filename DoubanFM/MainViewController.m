@@ -30,6 +30,7 @@ NSString *CELL_IDENTIFIER = @"SongCell";
 
 @property (nonatomic, strong) Song *song;
 @property (nonatomic, strong) NSDictionary *currentSong;
+@property (nonatomic) int currentSongIndex;
 @property (nonatomic) ArrayDataSource *ads;
 @property (nonatomic) AVPlayer *player;
 @property (nonatomic) NSTimer *timer;
@@ -49,7 +50,8 @@ NSString *CELL_IDENTIFIER = @"SongCell";
     // Get songs
     [_song refreshWithDataRefreshBlock:nil
                        completionBlock:^{
-                           [self changeSong:[_song getSongByIndex:0]];
+                           self.currentSongIndex = 0;
+                           [self changeSong:[_song getSongByIndex:self.currentSongIndex]];
                        }];
     
     // Blur the background image
@@ -60,6 +62,10 @@ NSString *CELL_IDENTIFIER = @"SongCell";
 
 - (void)changeSong:(NSDictionary *)song {
     NSLog(@"Change song");
+    
+    if (!song) {
+        return;
+    }
     
     self.currentSong = song;
     
@@ -106,6 +112,22 @@ NSString *CELL_IDENTIFIER = @"SongCell";
     } else {
         [self.player play];
         [self.playButton setImage:[UIImage imageNamed:@"pause"] forState:UIControlStateNormal];
+    }
+}
+
+- (IBAction)prev:(id)sender {
+    NSDictionary *song = [self.song getSongByIndex:(self.currentSongIndex - 1)];
+    if (song) {
+        [self changeSong:song];
+        self.currentSongIndex --;
+    }
+}
+
+- (IBAction)next:(id)sender {
+    NSDictionary *song = [self.song getSongByIndex:(self.currentSongIndex + 1)];
+    if (song) {
+        [self changeSong:song];
+        self.currentSongIndex ++;
     }
 }
 
