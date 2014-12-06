@@ -66,6 +66,9 @@
                     <state key="normal" image="pause">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="pause:" destination="-1" eventType="touchUpInside" id="zkA-f5-cZH"/>
+                    </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VtN-0G-EWH" userLabel="prev">
                     <rect key="frame" x="60" y="455" width="45" height="45"/>

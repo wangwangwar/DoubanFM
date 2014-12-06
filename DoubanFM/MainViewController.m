@@ -99,6 +99,16 @@ NSString *CELL_IDENTIFIER = @"SongCell";
     _progressBar.progress = [Time secondsWithCMTime:self.player.currentTime] / (double)[self.currentSong[@"length"] intValue];
 }
 
+- (IBAction)pause:(id)sender {
+    if (self.player.rate == 1.0) {
+        [self.player pause];
+        [self.playButton setImage:[UIImage imageNamed:@"play"] forState:UIControlStateNormal];
+    } else {
+        [self.player play];
+        [self.playButton setImage:[UIImage imageNamed:@"pause"] forState:UIControlStateNormal];
+    }
+}
+
 #pragma mark - Assists
 
 - (UIImage *)getBlurredImage:(UIImage *)image {
