@@ -43,7 +43,7 @@
 - (void)loadImageByURLString:(NSString *)urlString
              completionBlock:(void (^)(UIImage *))completionBlock {
     if (self.privateImages[urlString]) {
-        completionBlock(self.privateImages[urlString]);
+        if (completionBlock) completionBlock(self.privateImages[urlString]);
     }
 
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:urlString]];
