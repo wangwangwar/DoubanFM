@@ -90,10 +90,12 @@ NSString *SONG_URL = @"http://www.douban.com/j/app/radio/people?version=100&app_
 }
 
 - (NSDictionary *)getSongByIndex:(NSInteger)index {
-    if (index >= [_items count]) {
+    @try {
+        return _items[index];
+    }
+    @catch (NSException *exception) {
         return nil;
     }
-    return _items[index];
 }
 
 @end
