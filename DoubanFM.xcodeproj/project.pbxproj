@@ -21,6 +21,7 @@
 		611F12DC1A2456BF001FE5D9 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 611F12DB1A2456BF001FE5D9 /* ViewController.m */; };
 		617570EA1A25E23F003AF0A7 /* ImageStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 617570E91A25E23F003AF0A7 /* ImageStore.m */; };
 		617570EF1A260098003AF0A7 /* Time.m in Sources */ = {isa = PBXBuildFile; fileRef = 617570EE1A260098003AF0A7 /* Time.m */; };
+		61B7E2F11A340EAF00708E34 /* PageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 61B7E2F01A340EAF00708E34 /* PageViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +60,8 @@
 		617570E91A25E23F003AF0A7 /* ImageStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageStore.m; sourceTree = "<group>"; };
 		617570ED1A260098003AF0A7 /* Time.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Time.h; sourceTree = "<group>"; };
 		617570EE1A260098003AF0A7 /* Time.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Time.m; sourceTree = "<group>"; };
+		61B7E2EF1A340EAF00708E34 /* PageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PageViewController.h; sourceTree = "<group>"; };
+		61B7E2F01A340EAF00708E34 /* PageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PageViewController.m; sourceTree = "<group>"; };
 		73C5D9F35434DE3834129E5F /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B2F7158398F5FADBC644551 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -175,6 +178,7 @@
 		617570E51A25E1E7003AF0A7 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				61B7E2EE1A340E5E00708E34 /* PageViewController */,
 				617570EC1A25F970003AF0A7 /* NoUse */,
 				617570EB1A25F93C003AF0A7 /* MainViewController */,
 			);
@@ -217,6 +221,15 @@
 				611F12D41A245654001FE5D9 /* Main.storyboard */,
 			);
 			name = NoUse;
+			sourceTree = "<group>";
+		};
+		61B7E2EE1A340E5E00708E34 /* PageViewController */ = {
+			isa = PBXGroup;
+			children = (
+				61B7E2EF1A340EAF00708E34 /* PageViewController.h */,
+				61B7E2F01A340EAF00708E34 /* PageViewController.m */,
+			);
+			name = PageViewController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -357,6 +370,7 @@
 			files = (
 				6115BA961A2C53A9004C3948 /* Song.m in Sources */,
 				6115BA931A2C4B8C004C3948 /* ArrayDataSource.m in Sources */,
+				61B7E2F11A340EAF00708E34 /* PageViewController.m in Sources */,
 				617570EF1A260098003AF0A7 /* Time.m in Sources */,
 				611F12AF1A244FC4001FE5D9 /* AppDelegate.m in Sources */,
 				617570EA1A25E23F003AF0A7 /* ImageStore.m in Sources */,

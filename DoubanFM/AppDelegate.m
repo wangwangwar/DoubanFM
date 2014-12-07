@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "MainViewController.h"
+#import "PageViewController.h"
 
 @interface AppDelegate ()
 
@@ -18,7 +19,8 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     MainViewController *mvc = [[MainViewController alloc] init];
-    self.window.rootViewController = mvc;
+    PageViewController *pvc = [[PageViewController alloc] initWithViewControllers:@[mvc]];
+    self.window.rootViewController = pvc;
     
     return YES;
 }
