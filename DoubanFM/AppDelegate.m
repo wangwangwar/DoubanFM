@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "MainViewController.h"
 #import "PageViewController.h"
+#import "SongTableViewController.h"
 
 @interface AppDelegate ()
 
@@ -19,7 +20,8 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     MainViewController *mvc = [[MainViewController alloc] init];
-    PageViewController *pvc = [[PageViewController alloc] initWithViewControllers:@[mvc]];
+    SongTableViewController *stvc = [[SongTableViewController alloc] init];
+    PageViewController *pvc = [[PageViewController alloc] initWithViewControllers:@[stvc, mvc]];
     self.window.rootViewController = pvc;
     
     return YES;

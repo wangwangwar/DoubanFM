@@ -24,8 +24,8 @@
     
     if (self) {
         self.viewControllers = [[NSMutableArray alloc] initWithArray:viewControllers];
+        self.currentPageIndex = 1;
         [self setupPageViewController];
-        self.currentPageIndex = 0;
     }
     
     return self;
@@ -86,7 +86,7 @@
     self.pageController.dataSource = self;
     self.pageController.delegate = self;
     
-    [self.pageController setViewControllers:@[[self.viewControllers objectAtIndex:0]]
+    [self.pageController setViewControllers:@[[self.viewControllers objectAtIndex:self.currentPageIndex]]
                                   direction:UIPageViewControllerNavigationDirectionForward
                                    animated:YES
                                  completion:nil];
