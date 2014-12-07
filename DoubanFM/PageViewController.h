@@ -10,6 +10,8 @@
 
 @interface PageViewController : UIViewController
 
+@property (nonatomic, strong) NSMutableArray *viewControllers;
+
 - (instancetype)initWithViewControllers:(NSArray *)viewControllers;
 
 @end

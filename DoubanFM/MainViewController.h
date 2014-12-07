@@ -10,4 +10,6 @@
 
 @interface MainViewController : UIViewController
 
+- (void)changeSong:(NSDictionary *)song;
+
 @end

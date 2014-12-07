@@ -12,7 +12,6 @@
 @interface PageViewController () <UIPageViewControllerDataSource, UIPageViewControllerDelegate>
 
 @property (nonatomic, strong) UIPageViewController *pageController;
-@property (nonatomic, strong) NSMutableArray *viewControllers;
 @property (nonatomic) NSInteger currentPageIndex;
 
 @end

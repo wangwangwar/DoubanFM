@@ -9,6 +9,8 @@
 #import "SongTableViewController.h"
 #import "ArrayDataSource.h"
 #import "SongStore.h"
+#import "PageViewController.h"
+#import "MainViewController.h"
 
 NSString *CELL_IDENTIFIER = @"SongCell";
 
@@ -28,7 +30,6 @@ NSString *CELL_IDENTIFIER = @"SongCell";
            forCellReuseIdentifier:CELL_IDENTIFIER];
     
     // Set song table view data source
-    
     self.ads = [[ArrayDataSource alloc] initWithItems:@[]
                                        cellIdentifier:CELL_IDENTIFIER
                                    configureCellBlock:^(UITableViewCell *cell, NSDictionary *song) {
@@ -44,6 +45,16 @@ NSString *CELL_IDENTIFIER = @"SongCell";
                                       completionBlock:^{
                                           [self.tableView reloadData];
                                       }];
+}
+
+#pragma mark - Table View Delegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    // Select cell will change song
+    NSDictionary *song = [[SongStore sharedStore] getSongByIndex:indexPath.row];
+    PageViewController *pvc = self.parentViewController.parentViewController;
+    MainViewController *mvc = pvc.viewControllers[1];
+    [mvc changeSong:song];
 }
 
 @end
