@@ -97,6 +97,17 @@ NSString *SONG_URL = @"http://www.douban.com/j/app/radio/people?version=100&app_
     [dataTask resume];
 }
 
+- (void)loadWithDataRefreshBlock:(void (^)(NSArray *songArray))dataRefreshBlock
+                 completionBlock:(void (^)())completionBlock {
+    if (self.items) {
+        if (dataRefreshBlock) dataRefreshBlock(self.items);
+        if (completionBlock) completionBlock();
+    } else {
+        [self refreshWithDataRefreshBlock:dataRefreshBlock
+                          completionBlock:completionBlock];
+    }
+}
+
 - (void)preloadImages {
     for (NSDictionary *song in self.songs) {
         NSString *imgURLString = song[@"picture"];
