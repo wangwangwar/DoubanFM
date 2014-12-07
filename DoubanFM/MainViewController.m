@@ -26,7 +26,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *nextButton;
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 
-@property (nonatomic, strong) SongStore *songStore;
 @property (nonatomic, strong) NSDictionary *currentSong;
 @property (nonatomic) int currentSongIndex;
 @property (nonatomic) ArrayDataSource *ads;
@@ -42,14 +41,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    
-    // Get songs
-    [[SongStore sharedStore] refreshWithDataRefreshBlock:nil
-                                         completionBlock:^{
-                                             self.currentSongIndex = 0;
-                                             [self changeSong:[[SongStore sharedStore]
-                                                               getSongByIndex:self.currentSongIndex]];
-                                         }];
+    [[SongStore sharedStore] loadWithDataRefreshBlock:nil
+                                      completionBlock:^{
+                                          self.currentSongIndex = 0;
+                                          [self changeSong:[[SongStore sharedStore]
+                                                            getSongByIndex:self.currentSongIndex]];
+                                      }];
     
     // Blur the background image
     _bgImageView.image = [self getBlurredImage:_bgImageView.image];
