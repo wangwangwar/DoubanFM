@@ -6,36 +6,52 @@
 //  Copyright (c) 2014年 wangwangwar. All rights reserved.
 //
 
-#import "Song.h"
+#import "SongStore.h"
 #import "ImageStore.h"
 #import "ArrayDataSource.h"
 
 NSString *SONG_URL = @"http://www.douban.com/j/app/radio/people?version=100&app_name=radio_desktop_win&type=n&channel=%lu";
 
-@interface Song ()
+@interface SongStore ()
 
-@property (nonatomic) NSURLSession *session;
-@property (nonatomic) NSArray *items;
+@property (nonatomic, strong) NSURLSession *session;
+@property (nonatomic, strong) NSArray *items;
 @property (nonatomic) NSUInteger channelId;
 
 @end
 
-@implementation Song
+@implementation SongStore
+
+#pragma mark - Class Method
+
++ (instancetype)sharedStore {
+    static SongStore *sharedStore = nil;
+    
+    // Thread safe
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        sharedStore = [[self alloc] initPrivate];
+    });
+    
+    return sharedStore;
+}
 
 #pragma mark - Initialization
 
-- (instancetype)initWithChannelId:(NSUInteger)channelId {
+- (instancetype)init {
+    @throw [NSException exceptionWithName:@"Singleton" reason:@"Use +[SongStore sharedStore]" userInfo:nil];
+    return nil;
+}
+
+- (instancetype)initPrivate {
     self = [super init];
+    
     if (self) {
-        // Initial network
+        _channelId = 0;
+        
         NSURLSessionConfiguration *config =
         [NSURLSessionConfiguration defaultSessionConfiguration];
-        _session = [NSURLSession sessionWithConfiguration:config
-                                                 delegate:nil
-                                            delegateQueue:nil];
-        
-        // Initial channel
-        _channelId = channelId;
+        _session = [NSURLSession sessionWithConfiguration:config];
     }
     
     return self;
@@ -49,7 +65,7 @@ NSString *SONG_URL = @"http://www.douban.com/j/app/radio/people?version=100&app_
 
 #pragma mark - Operations
 
-- (void)refreshWithDataRefreshBlock:(void (^)(NSArray *))dataRefreshBlock
+- (void)refreshWithDataRefreshBlock:(void (^)(NSArray *songArray))dataRefreshBlock
               completionBlock:(void (^)())completionBlock {
     NSString *urlString = [NSString stringWithFormat:SONG_URL, (unsigned long)self.channelId];
     NSURL *url = [NSURL URLWithString:urlString];

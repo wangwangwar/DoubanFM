@@ -8,12 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
-@interface Song : NSObject
+@interface SongStore : NSObject
 
 @property (nonatomic, strong, readonly) NSArray *songs;
 
-- (instancetype)initWithChannelId:(NSUInteger)channelId;
-- (void)refreshWithDataRefreshBlock:(void (^)(NSArray *))dataRefreshBlock
++ (instancetype)sharedStore;
+- (void)refreshWithDataRefreshBlock:(void (^)(NSArray *songArray))dataRefreshBlock
                     completionBlock:(void (^)())completionBlock;
 - (void)preloadImages;
 - (NSDictionary *)getSongByIndex:(NSInteger)index;

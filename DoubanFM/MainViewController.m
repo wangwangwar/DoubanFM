@@ -10,11 +10,9 @@
 #import <FXBlurView/FXBlurView.h>
 #import "MainViewController.h"
 #import "ArrayDataSource.h"
-#import "Song.h"
+#import "SongStore.h"
 #import "ImageStore.h"
 #import "Time.h"
-
-NSString *CELL_IDENTIFIER = @"SongCell";
 
 @interface MainViewController () <UITableViewDelegate>
 
@@ -28,7 +26,7 @@ NSString *CELL_IDENTIFIER = @"SongCell";
 @property (weak, nonatomic) IBOutlet UIButton *nextButton;
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 
-@property (nonatomic, strong) Song *song;
+@property (nonatomic, strong) SongStore *songStore;
 @property (nonatomic, strong) NSDictionary *currentSong;
 @property (nonatomic) int currentSongIndex;
 @property (nonatomic) ArrayDataSource *ads;
@@ -44,15 +42,14 @@ NSString *CELL_IDENTIFIER = @"SongCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // Initial `Song` class
-    _song = [[Song alloc] initWithChannelId:0];
     
     // Get songs
-    [_song refreshWithDataRefreshBlock:nil
-                       completionBlock:^{
-                           self.currentSongIndex = 0;
-                           [self changeSong:[_song getSongByIndex:self.currentSongIndex]];
-                       }];
+    [[SongStore sharedStore] refreshWithDataRefreshBlock:nil
+                                         completionBlock:^{
+                                             self.currentSongIndex = 0;
+                                             [self changeSong:[[SongStore sharedStore]
+                                                               getSongByIndex:self.currentSongIndex]];
+                                         }];
     
     // Blur the background image
     _bgImageView.image = [self getBlurredImage:_bgImageView.image];
@@ -116,7 +113,7 @@ NSString *CELL_IDENTIFIER = @"SongCell";
 }
 
 - (IBAction)prev:(id)sender {
-    NSDictionary *song = [self.song getSongByIndex:(self.currentSongIndex - 1)];
+    NSDictionary *song = [[SongStore sharedStore] getSongByIndex:(self.currentSongIndex - 1)];
     if (song) {
         [self changeSong:song];
         self.currentSongIndex --;
@@ -124,7 +121,7 @@ NSString *CELL_IDENTIFIER = @"SongCell";
 }
 
 - (IBAction)next:(id)sender {
-    NSDictionary *song = [self.song getSongByIndex:(self.currentSongIndex + 1)];
+    NSDictionary *song = [[SongStore sharedStore] getSongByIndex:(self.currentSongIndex + 1)];
     if (song) {
         [self changeSong:song];
         self.currentSongIndex ++;

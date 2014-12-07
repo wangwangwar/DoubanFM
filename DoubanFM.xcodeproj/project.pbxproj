@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		5534C112EBFE1B38EE4BB122 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 73C5D9F35434DE3834129E5F /* libPods.a */; };
 		6115BA931A2C4B8C004C3948 /* ArrayDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 6115BA921A2C4B8C004C3948 /* ArrayDataSource.m */; };
-		6115BA961A2C53A9004C3948 /* Song.m in Sources */ = {isa = PBXBuildFile; fileRef = 6115BA951A2C53A9004C3948 /* Song.m */; };
+		6115BA961A2C53A9004C3948 /* SongStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 6115BA951A2C53A9004C3948 /* SongStore.m */; };
 		611F12AC1A244FC4001FE5D9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 611F12AB1A244FC4001FE5D9 /* main.m */; };
 		611F12AF1A244FC4001FE5D9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 611F12AE1A244FC4001FE5D9 /* AppDelegate.m */; };
 		611F12B71A244FC4001FE5D9 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 611F12B61A244FC4001FE5D9 /* Images.xcassets */; };
@@ -22,6 +22,7 @@
 		617570EA1A25E23F003AF0A7 /* ImageStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 617570E91A25E23F003AF0A7 /* ImageStore.m */; };
 		617570EF1A260098003AF0A7 /* Time.m in Sources */ = {isa = PBXBuildFile; fileRef = 617570EE1A260098003AF0A7 /* Time.m */; };
 		61B7E2F11A340EAF00708E34 /* PageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 61B7E2F01A340EAF00708E34 /* PageViewController.m */; };
+		61B7E2F51A34907300708E34 /* SongTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 61B7E2F41A34907300708E34 /* SongTableViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,8 +39,8 @@
 		336EFEA28DE2A0415D214E33 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		6115BA911A2C4B8C004C3948 /* ArrayDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArrayDataSource.h; sourceTree = "<group>"; };
 		6115BA921A2C4B8C004C3948 /* ArrayDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArrayDataSource.m; sourceTree = "<group>"; };
-		6115BA941A2C53A9004C3948 /* Song.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Song.h; sourceTree = "<group>"; };
-		6115BA951A2C53A9004C3948 /* Song.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Song.m; sourceTree = "<group>"; };
+		6115BA941A2C53A9004C3948 /* SongStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SongStore.h; sourceTree = "<group>"; };
+		6115BA951A2C53A9004C3948 /* SongStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SongStore.m; sourceTree = "<group>"; };
 		611F12A61A244FC4001FE5D9 /* DoubanFM.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DoubanFM.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		611F12AA1A244FC4001FE5D9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		611F12AB1A244FC4001FE5D9 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -62,6 +63,8 @@
 		617570EE1A260098003AF0A7 /* Time.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Time.m; sourceTree = "<group>"; };
 		61B7E2EF1A340EAF00708E34 /* PageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PageViewController.h; sourceTree = "<group>"; };
 		61B7E2F01A340EAF00708E34 /* PageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PageViewController.m; sourceTree = "<group>"; };
+		61B7E2F31A34907300708E34 /* SongTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SongTableViewController.h; sourceTree = "<group>"; };
+		61B7E2F41A34907300708E34 /* SongTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SongTableViewController.m; sourceTree = "<group>"; };
 		73C5D9F35434DE3834129E5F /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B2F7158398F5FADBC644551 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -107,8 +110,8 @@
 			children = (
 				617570E81A25E23F003AF0A7 /* ImageStore.h */,
 				617570E91A25E23F003AF0A7 /* ImageStore.m */,
-				6115BA941A2C53A9004C3948 /* Song.h */,
-				6115BA951A2C53A9004C3948 /* Song.m */,
+				6115BA941A2C53A9004C3948 /* SongStore.h */,
+				6115BA951A2C53A9004C3948 /* SongStore.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -178,6 +181,7 @@
 		617570E51A25E1E7003AF0A7 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				61B7E2F21A34902B00708E34 /* SongTableViewController */,
 				61B7E2EE1A340E5E00708E34 /* PageViewController */,
 				617570EC1A25F970003AF0A7 /* NoUse */,
 				617570EB1A25F93C003AF0A7 /* MainViewController */,
@@ -230,6 +234,15 @@
 				61B7E2F01A340EAF00708E34 /* PageViewController.m */,
 			);
 			name = PageViewController;
+			sourceTree = "<group>";
+		};
+		61B7E2F21A34902B00708E34 /* SongTableViewController */ = {
+			isa = PBXGroup;
+			children = (
+				61B7E2F31A34907300708E34 /* SongTableViewController.h */,
+				61B7E2F41A34907300708E34 /* SongTableViewController.m */,
+			);
+			name = SongTableViewController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -368,13 +381,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6115BA961A2C53A9004C3948 /* Song.m in Sources */,
+				6115BA961A2C53A9004C3948 /* SongStore.m in Sources */,
 				6115BA931A2C4B8C004C3948 /* ArrayDataSource.m in Sources */,
 				61B7E2F11A340EAF00708E34 /* PageViewController.m in Sources */,
 				617570EF1A260098003AF0A7 /* Time.m in Sources */,
 				611F12AF1A244FC4001FE5D9 /* AppDelegate.m in Sources */,
 				617570EA1A25E23F003AF0A7 /* ImageStore.m in Sources */,
 				611F12AC1A244FC4001FE5D9 /* main.m in Sources */,
+				61B7E2F51A34907300708E34 /* SongTableViewController.m in Sources */,
 				611F12DC1A2456BF001FE5D9 /* ViewController.m in Sources */,
 				611F12D21A24507E001FE5D9 /* MainViewController.m in Sources */,
 			);
