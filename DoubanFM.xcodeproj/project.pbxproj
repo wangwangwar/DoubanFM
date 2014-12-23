@@ -21,6 +21,8 @@
 		611F12DC1A2456BF001FE5D9 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 611F12DB1A2456BF001FE5D9 /* ViewController.m */; };
 		617570EA1A25E23F003AF0A7 /* ImageStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 617570E91A25E23F003AF0A7 /* ImageStore.m */; };
 		617570EF1A260098003AF0A7 /* Time.m in Sources */ = {isa = PBXBuildFile; fileRef = 617570EE1A260098003AF0A7 /* Time.m */; };
+		619547AF1A49359700F1DF85 /* ChannelTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 619547AC1A49359700F1DF85 /* ChannelTableViewController.m */; };
+		619547B01A49359700F1DF85 /* ChannelTableViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 619547AE1A49359700F1DF85 /* ChannelTableViewModel.m */; };
 		61B7E2F11A340EAF00708E34 /* PageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 61B7E2F01A340EAF00708E34 /* PageViewController.m */; };
 		61B7E2F51A34907300708E34 /* SongTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 61B7E2F41A34907300708E34 /* SongTableViewController.m */; };
 /* End PBXBuildFile section */
@@ -61,6 +63,10 @@
 		617570E91A25E23F003AF0A7 /* ImageStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageStore.m; sourceTree = "<group>"; };
 		617570ED1A260098003AF0A7 /* Time.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Time.h; sourceTree = "<group>"; };
 		617570EE1A260098003AF0A7 /* Time.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Time.m; sourceTree = "<group>"; };
+		619547AB1A49359700F1DF85 /* ChannelTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChannelTableViewController.h; sourceTree = "<group>"; };
+		619547AC1A49359700F1DF85 /* ChannelTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChannelTableViewController.m; sourceTree = "<group>"; };
+		619547AD1A49359700F1DF85 /* ChannelTableViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChannelTableViewModel.h; sourceTree = "<group>"; };
+		619547AE1A49359700F1DF85 /* ChannelTableViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChannelTableViewModel.m; sourceTree = "<group>"; };
 		61B7E2EF1A340EAF00708E34 /* PageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PageViewController.h; sourceTree = "<group>"; };
 		61B7E2F01A340EAF00708E34 /* PageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PageViewController.m; sourceTree = "<group>"; };
 		61B7E2F31A34907300708E34 /* SongTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SongTableViewController.h; sourceTree = "<group>"; };
@@ -139,6 +145,7 @@
 		611F12A81A244FC4001FE5D9 /* DoubanFM */ = {
 			isa = PBXGroup;
 			children = (
+				619547B21A4935AB00F1DF85 /* ChannelTableViewController */,
 				6115BA9B1A2C9659004C3948 /* Models */,
 				617570E71A25E222003AF0A7 /* Utils */,
 				617570E61A25E205003AF0A7 /* DataSources */,
@@ -225,6 +232,17 @@
 				611F12D41A245654001FE5D9 /* Main.storyboard */,
 			);
 			name = NoUse;
+			sourceTree = "<group>";
+		};
+		619547B21A4935AB00F1DF85 /* ChannelTableViewController */ = {
+			isa = PBXGroup;
+			children = (
+				619547AB1A49359700F1DF85 /* ChannelTableViewController.h */,
+				619547AC1A49359700F1DF85 /* ChannelTableViewController.m */,
+				619547AD1A49359700F1DF85 /* ChannelTableViewModel.h */,
+				619547AE1A49359700F1DF85 /* ChannelTableViewModel.m */,
+			);
+			name = ChannelTableViewController;
 			sourceTree = "<group>";
 		};
 		61B7E2EE1A340E5E00708E34 /* PageViewController */ = {
@@ -385,11 +403,13 @@
 				6115BA961A2C53A9004C3948 /* SongStore.m in Sources */,
 				6115BA931A2C4B8C004C3948 /* ArrayDataSource.m in Sources */,
 				61B7E2F11A340EAF00708E34 /* PageViewController.m in Sources */,
+				619547B01A49359700F1DF85 /* ChannelTableViewModel.m in Sources */,
 				617570EF1A260098003AF0A7 /* Time.m in Sources */,
 				611F12AF1A244FC4001FE5D9 /* AppDelegate.m in Sources */,
 				617570EA1A25E23F003AF0A7 /* ImageStore.m in Sources */,
 				611F12AC1A244FC4001FE5D9 /* main.m in Sources */,
 				61B7E2F51A34907300708E34 /* SongTableViewController.m in Sources */,
+				619547AF1A49359700F1DF85 /* ChannelTableViewController.m in Sources */,
 				611F12DC1A2456BF001FE5D9 /* ViewController.m in Sources */,
 				611F12D21A24507E001FE5D9 /* MainViewController.m in Sources */,
 			);

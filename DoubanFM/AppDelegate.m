@@ -10,6 +10,7 @@
 #import "MainViewController.h"
 #import "PageViewController.h"
 #import "SongTableViewController.h"
+#import "ChannelTableViewController.h"
 
 @interface AppDelegate ()
 
@@ -21,7 +22,11 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     MainViewController *mvc = [[MainViewController alloc] init];
     SongTableViewController *stvc = [[SongTableViewController alloc] init];
-    PageViewController *pvc = [[PageViewController alloc] initWithViewControllers:@[stvc, mvc]];
+    
+    ChannelTableViewModel *ctvm = [[ChannelTableViewModel alloc] init];
+    ChannelTableViewController *ctvc = [[ChannelTableViewController alloc] init];
+    ctvc.viewModel = ctvm;
+    PageViewController *pvc = [[PageViewController alloc] initWithViewControllers:@[stvc, mvc, ctvc]];
     self.window.rootViewController = pvc;
     
     return YES;
