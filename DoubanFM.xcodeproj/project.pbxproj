@@ -296,6 +296,7 @@
 				TargetAttributes = {
 					611F12A51A244FC4001FE5D9 = {
 						CreatedOnToolsVersion = 6.1;
+						DevelopmentTeam = L552KHMTXR;
 					};
 					611F12BE1A244FC4001FE5D9 = {
 						CreatedOnToolsVersion = 6.1;
@@ -514,6 +515,7 @@
 			baseConfigurationReference = 9B2F7158398F5FADBC644551 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = DoubanFM/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -525,6 +527,7 @@
 			baseConfigurationReference = 336EFEA28DE2A0415D214E33 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = DoubanFM/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
