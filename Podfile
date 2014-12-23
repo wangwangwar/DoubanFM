@@ -2,6 +2,10 @@
 # platform :ios, '6.0'
 
 pod 'FXBlurView'
+pod 'ReactiveCocoa'
+pod 'ReactiveViewModel'
+pod 'AFNetworking'
+pod 'AFNetworking-RACExtensions'
 
 target 'DoubanFM' do
 end
