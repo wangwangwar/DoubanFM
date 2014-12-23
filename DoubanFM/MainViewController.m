@@ -50,6 +50,11 @@
     
     // Blur the background image
     _bgImageView.image = [self getBlurredImage:_bgImageView.image];
+    
+    // Allow play in background
+    AVAudioSession *session = [AVAudioSession sharedInstance];
+    [session setActive:YES error:nil];
+    [session setCategory:AVAudioSessionCategoryPlayback error:nil];
 }
 
 #pragma mark - Operations
