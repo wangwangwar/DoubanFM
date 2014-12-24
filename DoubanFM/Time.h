@@ -12,5 +12,6 @@
 @interface Time : NSObject
 
 + (NSString *)timeStringWithCMTime:(CMTime)time;
++ (int)secondsWithCMTime:(CMTime)time;
 
 @end

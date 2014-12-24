@@ -7,22 +7,27 @@
 //
 
 #import <AVFoundation/AVFoundation.h>
+#import <FXBlurView/FXBlurView.h>
 #import "MainViewController.h"
 #import "ArrayDataSource.h"
-#import "Song.h"
+#import "SongStore.h"
 #import "ImageStore.h"
 #import "Time.h"
 
-NSString *CELL_IDENTIFIER = @"SongCell";
-
 @interface MainViewController () <UITableViewDelegate>
 
-@property (weak, nonatomic) IBOutlet UIImageView *imageView;
-@property (weak, nonatomic) IBOutlet UILabel *timeLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *bgImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *albumImageView;
+@property (weak, nonatomic) IBOutlet UILabel *songTitle;
+@property (weak, nonatomic) IBOutlet UILabel *authorAndAlbumName;
 @property (weak, nonatomic) IBOutlet UIProgressView *progressBar;
-@property (weak, nonatomic) IBOutlet UITableView *tv;
+@property (weak, nonatomic) IBOutlet UIButton *playButton;
+@property (weak, nonatomic) IBOutlet UIButton *prevButton;
+@property (weak, nonatomic) IBOutlet UIButton *nextButton;
+@property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 
-@property (nonatomic, strong) Song *song;
+@property (nonatomic, strong) NSDictionary *currentSong;
+@property (nonatomic) int currentSongIndex;
 @property (nonatomic) ArrayDataSource *ads;
 @property (nonatomic) AVPlayer *player;
 @property (nonatomic) NSTimer *timer;
@@ -36,67 +41,116 @@ NSString *CELL_IDENTIFIER = @"SongCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // Register cell identifier for later using
-    [self.tv registerClass:[UITableViewCell class]
-           forCellReuseIdentifier:CELL_IDENTIFIER];
+    [[SongStore sharedStore] loadWithDataRefreshBlock:nil
+                                      completionBlock:^{
+                                          self.currentSongIndex = 0;
+                                          [self changeSong:[[SongStore sharedStore]
+                                                            getSongByIndex:self.currentSongIndex]];
+                                      }];
     
-    // Initial `Song` class
-    _song = [[Song alloc] initWithChannelId:0];
+    // Blur the background image
+    _bgImageView.image = [self getBlurredImage:_bgImageView.image];
     
-    // Set song table view data source
-    self.ads = [[ArrayDataSource alloc] initWithItems:_song.songs
-                                       cellIdentifier:CELL_IDENTIFIER
-                                   configureCellBlock:^(UITableViewCell *cell, NSDictionary *song) {
-                                       cell.textLabel.text = song[@"title"];
-                                   }];
-    self.tv.dataSource = self.ads;
+    // Allow play in background
+    AVAudioSession *session = [AVAudioSession sharedInstance];
+    [session setActive:YES error:nil];
+    [session setCategory:AVAudioSessionCategoryPlayback error:nil];
     
-    // Set song table view delegate
-    self.tv.delegate = self;
-    
-    [_song refreshWithDataRefreshBlock:^(NSArray *songs) {
-        [self.ads setItems:songs];
-    }
-                 completionBlock:^{
-        [self.tv reloadData];
+    //
+    @weakify(self)
+    [RACObserve([SongStore sharedStore], songs) subscribeNext:^(NSArray *songs) {
+        @strongify(self)
+        [self changeSong:songs[self.currentSongIndex]];
     }];
 }
 
 #pragma mark - Operations
 
-- (void)playMusicByURL:(NSURL *)url {
-    NSLog(@"Play");
-    self.player = [[AVPlayer alloc] initWithURL:url];
-    [self.player play];
+- (void)changeSong:(NSDictionary *)song {
+    NSLog(@"Change song: %@", song);
+    
+    if (!song) {
+        return;
+    }
+    
+    self.currentSong = song;
     
     // Set time label update timer
     [self.timer invalidate];
     self.timer = [NSTimer scheduledTimerWithTimeInterval:0.3
                                                       target:self
-                                                    selector:@selector(updateTimeLabel:)
+                                                    selector:@selector(updateAll:)
                                                     userInfo:nil
                                                      repeats:YES];
+    
+    // Set bg and album image
+    [self setImageByURLString:song[@"picture"]];
+    
+    // Set song title, singer and album name
+    _songTitle.text = song[@"title"];
+    _authorAndAlbumName.text = [NSString stringWithFormat:@"%@ - %@",
+                                song[@"artist"], song[@"albumtitle"]];
+    
+    // Play!
+    self.player = [[AVPlayer alloc] initWithURL:[NSURL URLWithString:song[@"url"]]];
+    [self.player play];
+}
+
+#pragma mark - Actions
+
+- (void)updateAll:(id)sender {
+    [self updateTimeLabel:sender];
+    [self updateProgress:sender];
+}
+
+- (void)updateTimeLabel:(id)sender {
+    self.timeLabel.text = [Time timeStringWithCMTime:self.player.currentTime];
+}
+
+- (void)updateProgress:(id)sender {
+    _progressBar.progress = [Time secondsWithCMTime:self.player.currentTime] / (double)[self.currentSong[@"length"] intValue];
+}
+
+- (IBAction)pause:(id)sender {
+    if (self.player.rate == 1.0) {
+        [self.player pause];
+        [self.playButton setImage:[UIImage imageNamed:@"play"] forState:UIControlStateNormal];
+    } else {
+        [self.player play];
+        [self.playButton setImage:[UIImage imageNamed:@"pause"] forState:UIControlStateNormal];
+    }
+}
+
+- (IBAction)prev:(id)sender {
+    NSDictionary *song = [[SongStore sharedStore] getSongByIndex:(self.currentSongIndex - 1)];
+    if (song) {
+        [self changeSong:song];
+        self.currentSongIndex --;
+    }
+}
+
+- (IBAction)next:(id)sender {
+    NSDictionary *song = [[SongStore sharedStore] getSongByIndex:(self.currentSongIndex + 1)];
+    if (song) {
+        [self changeSong:song];
+        self.currentSongIndex ++;
+    }
+}
+
+#pragma mark - Assists
+
+- (UIImage *)getBlurredImage:(UIImage *)image {
+    return [image blurredImageWithRadius:10.0
+                              iterations:5
+                               tintColor:[UIColor blackColor]];
 }
 
 - (void)setImageByURLString:(NSString *)urlString {
     [[ImageStore sharedStore] loadImageByURLString:urlString
                                    completionBlock:^(UIImage *image) {
-                                       self.imageView.image = image;
+                                       _bgImageView.image = [self getBlurredImage:image];
+                                       _albumImageView.image = image;
                                    }];
 }
 
-#pragma mark - Table view delegate
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSDictionary *song = _song.songs[indexPath.row];
-    NSURL *songUrl = [NSURL URLWithString:song[@"url"]];
-    [self setImageByURLString:song[@"picture"]];
-    [self playMusicByURL:songUrl];
-}
-
-#pragma mark - Actions
-
-- (void)updateTimeLabel:(id)sender {
-    self.timeLabel.text = [Time timeStringWithCMTime:self.player.currentTime];
-}
 @end

@@ -6,50 +6,59 @@
 //  Copyright (c) 2014年 wangwangwar. All rights reserved.
 //
 
-#import "Song.h"
+#import "SongStore.h"
 #import "ImageStore.h"
 #import "ArrayDataSource.h"
+#import <RACAFNetworking.h>
 
 NSString *SONG_URL = @"http://www.douban.com/j/app/radio/people?version=100&app_name=radio_desktop_win&type=n&channel=%lu";
 
-@interface Song ()
+@interface SongStore ()
 
-@property (nonatomic) NSURLSession *session;
-@property (nonatomic) NSArray *items;
-@property (nonatomic) NSUInteger channelId;
+@property (nonatomic, strong) NSURLSession *session;
 
 @end
 
-@implementation Song
+@implementation SongStore
+
+#pragma mark - Class Method
+
++ (instancetype)sharedStore {
+    static SongStore *sharedStore = nil;
+    
+    // Thread safe
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        sharedStore = [[self alloc] initPrivate];
+    });
+    
+    return sharedStore;
+}
 
 #pragma mark - Initialization
 
-- (instancetype)initWithChannelId:(NSUInteger)channelId {
+- (instancetype)init {
+    @throw [NSException exceptionWithName:@"Singleton" reason:@"Use +[SongStore sharedStore]" userInfo:nil];
+    return nil;
+}
+
+- (instancetype)initPrivate {
     self = [super init];
+    
     if (self) {
-        // Initial network
+        _channelId = 0;
+        
         NSURLSessionConfiguration *config =
         [NSURLSessionConfiguration defaultSessionConfiguration];
-        _session = [NSURLSession sessionWithConfiguration:config
-                                                 delegate:nil
-                                            delegateQueue:nil];
-        
-        // Initial channel
-        _channelId = channelId;
+        _session = [NSURLSession sessionWithConfiguration:config];
     }
     
     return self;
 }
 
-#pragma mark - Properties
-
-- (NSArray *)songs {
-    return _items;
-}
-
 #pragma mark - Operations
 
-- (void)refreshWithDataRefreshBlock:(void (^)(NSArray *))dataRefreshBlock
+- (void)refreshWithDataRefreshBlock:(void (^)(NSArray *songArray))dataRefreshBlock
               completionBlock:(void (^)())completionBlock {
     NSString *urlString = [NSString stringWithFormat:SONG_URL, (unsigned long)self.channelId];
     NSURL *url = [NSURL URLWithString:urlString];
@@ -61,10 +70,11 @@ NSString *SONG_URL = @"http://www.douban.com/j/app/radio/people?version=100&app_
                         NSDictionary *songsData = [NSJSONSerialization JSONObjectWithData:data
                                                                                   options:0
                                                                                     error:nil];
-                        self.items = songsData[@"song"];
+                        self.songs = songsData[@"song"];
+                        //NSLog(@"%@", self.items);
                         
                         if (dataRefreshBlock) {
-                            dataRefreshBlock(self.items);
+                            dataRefreshBlock(self.songs);
                         }
                         
                         if (completionBlock) {
@@ -80,12 +90,47 @@ NSString *SONG_URL = @"http://www.douban.com/j/app/radio/people?version=100&app_
     [dataTask resume];
 }
 
+- (void)loadWithDataRefreshBlock:(void (^)(NSArray *songArray))dataRefreshBlock
+                 completionBlock:(void (^)())completionBlock {
+    if (self.songs) {
+        if (dataRefreshBlock) dataRefreshBlock(self.songs);
+        if (completionBlock) completionBlock();
+    } else {
+        [self refreshWithDataRefreshBlock:dataRefreshBlock
+                          completionBlock:completionBlock];
+    }
+}
+
 - (void)preloadImages {
     for (NSDictionary *song in self.songs) {
         NSString *imgURLString = song[@"picture"];
         [[ImageStore sharedStore] loadImageByURLString:imgURLString
                                        completionBlock:nil];
     }
+}
+
+- (NSDictionary *)getSongByIndex:(NSInteger)index {
+    if (index >= 0 && index < [self.songs count]) {
+        return _songs[index];
+    }
+    return nil;
+}
+
+- (void)changeChannel:(NSUInteger)channelId {
+    RAC(self, songs) = [self requestSongListWithChannel:channelId];
+}
+
+#pragma mark - RAC
+
+- (RACSignal *)requestSongListWithChannel:(NSUInteger)channelId {
+    return [[[[AFHTTPSessionManager manager]
+              rac_GET:[NSString stringWithFormat:SONG_URL, channelId] parameters:nil]
+              map:^id(NSDictionary *response) {
+                  return response[@"song"];
+              }]
+              filter:^BOOL(NSArray *songList) {
+                  return [songList count] > 0;
+              }];
 }
 
 @end

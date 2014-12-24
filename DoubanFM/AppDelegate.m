@@ -8,6 +8,8 @@
 
 #import "AppDelegate.h"
 #import "MainViewController.h"
+#import "PageViewController.h"
+#import "ChannelTableViewController.h"
 
 @interface AppDelegate ()
 
@@ -18,7 +20,11 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     MainViewController *mvc = [[MainViewController alloc] init];
-    self.window.rootViewController = mvc;
+    ChannelTableViewModel *ctvm = [[ChannelTableViewModel alloc] init];
+    ChannelTableViewController *ctvc = [[ChannelTableViewController alloc] init];
+    ctvc.viewModel = ctvm;
+    PageViewController *pvc = [[PageViewController alloc] initWithViewControllers:@[ctvc, mvc]];
+    self.window.rootViewController = pvc;
     
     return YES;
 }
