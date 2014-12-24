@@ -7,12 +7,16 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <ReactiveCocoa.h>
 
 @interface SongStore : NSObject
 
-@property (nonatomic, strong, readonly) NSArray *songs;
+@property (nonatomic, strong) NSArray *songs;
+@property (nonatomic, strong) NSString *channelId;
 
 + (instancetype)sharedStore;
+
+- (void)changeChannel:(NSUInteger)channelId;
 - (void)refreshWithDataRefreshBlock:(void (^)(NSArray *songArray))dataRefreshBlock
                     completionBlock:(void (^)())completionBlock;
 // give data using dataRefreshBlock. If having no data, using

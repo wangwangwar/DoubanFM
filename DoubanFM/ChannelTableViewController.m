@@ -10,7 +10,7 @@
 #import "ArrayDataSource.h"
 #import "SongStore.h"
 #import "PageViewController.h"
-#import "MainViewController.h"
+#import "SongTableViewController.h"
 #import <ReactiveCocoa.h>
 
 static NSString *CELL_IDENTIFIER = @"ChannelCell";
@@ -22,11 +22,6 @@ static NSString *CELL_IDENTIFIER = @"ChannelCell";
 @implementation ChannelTableViewController
 
 #pragma mark - View
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    self.viewModel.active = YES;
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -42,12 +37,24 @@ static NSString *CELL_IDENTIFIER = @"ChannelCell";
           @strongify(self);
           [self.tableView reloadData];
       }];
+    
+    [RACObserve(self.viewModel, currentChannelIndex) subscribeNext:^(NSNumber *index) {
+        @strongify(self)
+        NSUInteger channelId = [self.viewModel channelIdAtIndex:index.integerValue];
+        NSLog(@"channelId: %lu", (unsigned long)channelId);
+    }];
 }
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    self.viewModel.active = YES;
+}
+
 
 #pragma mark - Table View Data Source
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self.viewModel.channelList count];
+    return [self.viewModel count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -60,13 +67,20 @@ static NSString *CELL_IDENTIFIER = @"ChannelCell";
 #pragma mark - Table View Delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSUInteger channelId = [self.viewModel channelIdAtIndexPath:indexPath];
+    self.viewModel.currentChannelIndex = @(indexPath.row);
+    [self.tableView reloadData];
+    //
+    NSUInteger channelId = [self.viewModel channelIdAtIndex:indexPath.row];
+    [[SongStore sharedStore] changeChannel:channelId];
 }
 
 #pragma mark - Private
 
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
-    cell.textLabel.text = [self.viewModel titleAtIndexPath:indexPath];
+    cell.textLabel.text = [self.viewModel titleAtIndex:indexPath.row];
+    // Current channel cell has a checkmark
+    BOOL isCurrentChannel = indexPath.row == self.viewModel.currentChannelIndex.integerValue;
+    cell.accessoryType = isCurrentChannel ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone;
 }
 
 @end

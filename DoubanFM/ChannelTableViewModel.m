@@ -32,12 +32,17 @@ NSString *CHANNEL_URL = @"http://www.douban.com/j/app/radio/channels";
             }];
 }
 
-- (NSString *)titleAtIndexPath:(NSIndexPath *)path {
-    return _channelList[path.row][@"name"];
+- (NSString *)titleAtIndex:(NSUInteger )index {
+    return _channelList[index][@"name"];
 }
 
-- (NSUInteger)channelIdAtIndexPath:(NSIndexPath *)path {
-    return (NSUInteger)_channelList[path.row][@"channel_id"];
+- (NSUInteger)channelIdAtIndex:(NSUInteger)index {
+    NSString *channelIdStr = _channelList[index][@"channel_id"];
+    return (NSUInteger)channelIdStr.integerValue;
+}
+
+- (NSUInteger)count {
+    return [_channelList count];
 }
 
 @end

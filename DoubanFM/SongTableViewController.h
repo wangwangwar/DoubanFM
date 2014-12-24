@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ArrayDataSource.h"
 
 @interface SongTableViewController : UITableViewController
+
+@property (nonatomic, strong) ArrayDataSource *ads;
 
 @end

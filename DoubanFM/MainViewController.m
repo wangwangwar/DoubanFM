@@ -55,12 +55,19 @@
     AVAudioSession *session = [AVAudioSession sharedInstance];
     [session setActive:YES error:nil];
     [session setCategory:AVAudioSessionCategoryPlayback error:nil];
+    
+    //
+    @weakify(self)
+    [RACObserve([SongStore sharedStore], songs) subscribeNext:^(NSArray *songs) {
+        @strongify(self)
+        [self changeSong:songs[self.currentSongIndex]];
+    }];
 }
 
 #pragma mark - Operations
 
 - (void)changeSong:(NSDictionary *)song {
-    NSLog(@"Change song");
+    NSLog(@"Change song: %@", song);
     
     if (!song) {
         return;

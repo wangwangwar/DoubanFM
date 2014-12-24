@@ -11,8 +11,15 @@
 @interface ChannelTableViewModel : RVMViewModel
 
 @property (nonatomic, strong) NSArray *channelList;
+@property (nonatomic) NSNumber *currentChannelIndex;
 
-- (NSString *)titleAtIndexPath:(NSIndexPath *)path;
-- (NSUInteger)channelIdAtIndexPath:(NSIndexPath *)path;
+// Return title of channel at index path
+- (NSString *)titleAtIndex:(NSUInteger)index;
+
+// Return id of channel at index path
+- (NSUInteger)channelIdAtIndex:(NSUInteger)index;
+
+// Return channel's count
+- (NSUInteger)count;
 
 @end

@@ -24,7 +24,6 @@
 		619547AF1A49359700F1DF85 /* ChannelTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 619547AC1A49359700F1DF85 /* ChannelTableViewController.m */; };
 		619547B01A49359700F1DF85 /* ChannelTableViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 619547AE1A49359700F1DF85 /* ChannelTableViewModel.m */; };
 		61B7E2F11A340EAF00708E34 /* PageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 61B7E2F01A340EAF00708E34 /* PageViewController.m */; };
-		61B7E2F51A34907300708E34 /* SongTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 61B7E2F41A34907300708E34 /* SongTableViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,8 +68,6 @@
 		619547AE1A49359700F1DF85 /* ChannelTableViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChannelTableViewModel.m; sourceTree = "<group>"; };
 		61B7E2EF1A340EAF00708E34 /* PageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PageViewController.h; sourceTree = "<group>"; };
 		61B7E2F01A340EAF00708E34 /* PageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PageViewController.m; sourceTree = "<group>"; };
-		61B7E2F31A34907300708E34 /* SongTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SongTableViewController.h; sourceTree = "<group>"; };
-		61B7E2F41A34907300708E34 /* SongTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SongTableViewController.m; sourceTree = "<group>"; };
 		73C5D9F35434DE3834129E5F /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B2F7158398F5FADBC644551 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -188,7 +185,6 @@
 		617570E51A25E1E7003AF0A7 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				61B7E2F21A34902B00708E34 /* SongTableViewController */,
 				61B7E2EE1A340E5E00708E34 /* PageViewController */,
 				617570EC1A25F970003AF0A7 /* NoUse */,
 				617570EB1A25F93C003AF0A7 /* MainViewController */,
@@ -252,15 +248,6 @@
 				61B7E2F01A340EAF00708E34 /* PageViewController.m */,
 			);
 			name = PageViewController;
-			sourceTree = "<group>";
-		};
-		61B7E2F21A34902B00708E34 /* SongTableViewController */ = {
-			isa = PBXGroup;
-			children = (
-				61B7E2F31A34907300708E34 /* SongTableViewController.h */,
-				61B7E2F41A34907300708E34 /* SongTableViewController.m */,
-			);
-			name = SongTableViewController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -408,7 +395,6 @@
 				611F12AF1A244FC4001FE5D9 /* AppDelegate.m in Sources */,
 				617570EA1A25E23F003AF0A7 /* ImageStore.m in Sources */,
 				611F12AC1A244FC4001FE5D9 /* main.m in Sources */,
-				61B7E2F51A34907300708E34 /* SongTableViewController.m in Sources */,
 				619547AF1A49359700F1DF85 /* ChannelTableViewController.m in Sources */,
 				611F12DC1A2456BF001FE5D9 /* ViewController.m in Sources */,
 				611F12D21A24507E001FE5D9 /* MainViewController.m in Sources */,

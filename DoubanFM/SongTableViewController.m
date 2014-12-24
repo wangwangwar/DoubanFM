@@ -7,7 +7,6 @@
 //
 
 #import "SongTableViewController.h"
-#import "ArrayDataSource.h"
 #import "SongStore.h"
 #import "PageViewController.h"
 #import "MainViewController.h"
@@ -15,8 +14,6 @@
 NSString *CELL_IDENTIFIER = @"SongCell";
 
 @interface SongTableViewController ()
-
-@property (nonatomic, strong) ArrayDataSource *ads;
 
 @end
 
@@ -39,12 +36,21 @@ NSString *CELL_IDENTIFIER = @"SongCell";
     
     [self.ads setItems:[SongStore sharedStore].songs];
     [self.tableView reloadData];
+    
+    @weakify(self)
     [[SongStore sharedStore] loadWithDataRefreshBlock:^(NSArray *songArray) {
         [self.ads setItems:songArray];
     }
                                       completionBlock:^{
+                                          @strongify(self)
                                           [self.tableView reloadData];
                                       }];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    [self.tableView reloadData];
 }
 
 #pragma mark - Table View Delegate
@@ -55,6 +61,13 @@ NSString *CELL_IDENTIFIER = @"SongCell";
     PageViewController *pvc = self.parentViewController.parentViewController;
     MainViewController *mvc = pvc.viewControllers[1];
     [mvc changeSong:song];
+}
+
+#pragma mark - Interface
+
+- (void)updateArrayDataSource:(NSArray *)array {
+    [self.ads setItems:array];
+    [self.tableView reloadData];
 }
 
 @end

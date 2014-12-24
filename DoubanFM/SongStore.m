@@ -9,14 +9,13 @@
 #import "SongStore.h"
 #import "ImageStore.h"
 #import "ArrayDataSource.h"
+#import <RACAFNetworking.h>
 
 NSString *SONG_URL = @"http://www.douban.com/j/app/radio/people?version=100&app_name=radio_desktop_win&type=n&channel=%lu";
 
 @interface SongStore ()
 
 @property (nonatomic, strong) NSURLSession *session;
-@property (nonatomic, strong) NSArray *items;
-@property (nonatomic) NSUInteger channelId;
 
 @end
 
@@ -57,12 +56,6 @@ NSString *SONG_URL = @"http://www.douban.com/j/app/radio/people?version=100&app_
     return self;
 }
 
-#pragma mark - Properties
-
-- (NSArray *)songs {
-    return _items;
-}
-
 #pragma mark - Operations
 
 - (void)refreshWithDataRefreshBlock:(void (^)(NSArray *songArray))dataRefreshBlock
@@ -77,11 +70,11 @@ NSString *SONG_URL = @"http://www.douban.com/j/app/radio/people?version=100&app_
                         NSDictionary *songsData = [NSJSONSerialization JSONObjectWithData:data
                                                                                   options:0
                                                                                     error:nil];
-                        self.items = songsData[@"song"];
-                        NSLog(@"%@", self.items);
+                        self.songs = songsData[@"song"];
+                        //NSLog(@"%@", self.items);
                         
                         if (dataRefreshBlock) {
-                            dataRefreshBlock(self.items);
+                            dataRefreshBlock(self.songs);
                         }
                         
                         if (completionBlock) {
@@ -99,8 +92,8 @@ NSString *SONG_URL = @"http://www.douban.com/j/app/radio/people?version=100&app_
 
 - (void)loadWithDataRefreshBlock:(void (^)(NSArray *songArray))dataRefreshBlock
                  completionBlock:(void (^)())completionBlock {
-    if (self.items) {
-        if (dataRefreshBlock) dataRefreshBlock(self.items);
+    if (self.songs) {
+        if (dataRefreshBlock) dataRefreshBlock(self.songs);
         if (completionBlock) completionBlock();
     } else {
         [self refreshWithDataRefreshBlock:dataRefreshBlock
@@ -117,12 +110,27 @@ NSString *SONG_URL = @"http://www.douban.com/j/app/radio/people?version=100&app_
 }
 
 - (NSDictionary *)getSongByIndex:(NSInteger)index {
-    @try {
-        return _items[index];
+    if (index >= 0 && index < [self.songs count]) {
+        return _songs[index];
     }
-    @catch (NSException *exception) {
-        return nil;
-    }
+    return nil;
+}
+
+- (void)changeChannel:(NSUInteger)channelId {
+    RAC(self, songs) = [self requestSongListWithChannel:channelId];
+}
+
+#pragma mark - RAC
+
+- (RACSignal *)requestSongListWithChannel:(NSUInteger)channelId {
+    return [[[[AFHTTPSessionManager manager]
+              rac_GET:[NSString stringWithFormat:SONG_URL, channelId] parameters:nil]
+              map:^id(NSDictionary *response) {
+                  return response[@"song"];
+              }]
+              filter:^BOOL(NSArray *songList) {
+                  return [songList count] > 0;
+              }];
 }
 
 @end
