@@ -58,10 +58,12 @@
     
     //
     @weakify(self)
-    [RACObserve([SongStore sharedStore], songs) subscribeNext:^(NSArray *songs) {
-        @strongify(self)
-        [self changeSong:songs[self.currentSongIndex]];
-    }];
+    [[RACObserve([SongStore sharedStore], songs)
+      deliverOn:[RACScheduler mainThreadScheduler]]
+      subscribeNext:^(NSArray *songs) {
+          @strongify(self)
+          [self changeSong:songs[self.currentSongIndex]];
+      }];
 }
 
 #pragma mark - Operations
