@@ -118,7 +118,7 @@ NSString *SONG_URL = @"http://www.douban.com/j/app/radio/people?version=100&app_
 
 - (void)changeChannel:(NSUInteger)channelId {
     [[self requestSongListWithChannel:channelId] subscribeNext:^(NSArray *songs) {
-        _songs = songs;
+        self.songs = songs;
     }];
 }
 
