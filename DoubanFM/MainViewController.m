@@ -41,12 +41,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [[SongStore sharedStore] loadWithDataRefreshBlock:nil
-                                      completionBlock:^{
-                                          self.currentSongIndex = 0;
-                                          [self changeSong:[[SongStore sharedStore]
-                                                            getSongByIndex:self.currentSongIndex]];
-                                      }];
+    self.currentSongIndex = 0;
+    
+    @weakify(self)
+    
+    // Initial songs
+    [[[SongStore sharedStore] requestSongListWithChannel:0] subscribeNext:^(NSArray *songs) {
+        @strongify(self)
+        [SongStore sharedStore].songs = [NSMutableArray arrayWithArray:songs];
+        [self changeSong:[[SongStore sharedStore] getSongByIndex:self.currentSongIndex]];
+    }];
     
     // Blur the background image
     _bgImageView.image = [self getBlurredImage:_bgImageView.image];
@@ -57,7 +61,6 @@
     [session setCategory:AVAudioSessionCategoryPlayback error:nil];
     
     //
-    @weakify(self)
     [[RACObserve([SongStore sharedStore], songs)
       deliverOn:[RACScheduler mainThreadScheduler]]
       subscribeNext:^(NSArray *songs) {
