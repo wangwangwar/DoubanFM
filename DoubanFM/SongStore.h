@@ -11,8 +11,8 @@
 
 @interface SongStore : NSObject
 
-@property (nonatomic, strong) NSArray *songs;
-@property (nonatomic, strong) NSString *channelId;
+@property (nonatomic, strong) NSMutableArray *songs;
+@property (nonatomic) NSUInteger channelId;
 
 + (instancetype)sharedStore;
 

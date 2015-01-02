@@ -62,6 +62,7 @@
       deliverOn:[RACScheduler mainThreadScheduler]]
       subscribeNext:^(NSArray *songs) {
           @strongify(self)
+          self.currentSongIndex = 0;
           [self changeSong:songs[self.currentSongIndex]];
       }];
 }
