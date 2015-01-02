@@ -110,15 +110,23 @@ NSString *SONG_URL = @"http://www.douban.com/j/app/radio/people?version=100&app_
 }
 
 - (NSDictionary *)getSongByIndex:(NSInteger)index {
-    if (index >= 0 && index < [self.songs count]) {
-        return _songs[index];
+    if (index < 0 || index >= [self.songs count]) {
+        return nil;
     }
-    return nil;
+    
+    // if last song, request new songs and append to `_songs`
+    if ([self.songs count] - 1 == index) {
+        [[self requestSongListWithChannel:self.channelId] subscribeNext:^(NSArray *songs) {
+            [_songs addObjectsFromArray:songs];
+        }];
+    }
+    return self.songs[index];
 }
 
 - (void)changeChannel:(NSUInteger)channelId {
+    self.channelId = channelId;
     [[self requestSongListWithChannel:channelId] subscribeNext:^(NSArray *songs) {
-        self.songs = songs;
+        self.songs = [[NSMutableArray alloc] initWithArray:songs];
     }];
 }
 
