@@ -19,7 +19,6 @@
 - (void)changeChannel:(NSUInteger)channelId;
 - (RACSignal *)requestSongListWithChannel:(NSUInteger)channelId;
 
-- (void)preloadImages;
 - (NSDictionary *)getSongByIndex:(NSInteger)index;
 
 @end

@@ -58,14 +58,6 @@ NSString *SONG_URL = @"http://www.douban.com/j/app/radio/people?version=100&app_
 
 #pragma mark - Operations
 
-- (void)preloadImages {
-    for (NSDictionary *song in self.songs) {
-        NSString *imgURLString = song[@"picture"];
-        [[ImageStore sharedStore] loadImageByURLString:imgURLString
-                                       completionBlock:nil];
-    }
-}
-
 - (NSDictionary *)getSongByIndex:(NSInteger)index {
     if (index < 0 || index >= [self.songs count]) {
         return nil;
