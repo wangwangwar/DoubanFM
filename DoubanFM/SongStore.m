@@ -58,57 +58,6 @@ NSString *SONG_URL = @"http://www.douban.com/j/app/radio/people?version=100&app_
 
 #pragma mark - Operations
 
-- (void)refreshWithDataRefreshBlock:(void (^)(NSArray *songArray))dataRefreshBlock
-              completionBlock:(void (^)())completionBlock {
-    NSString *urlString = [NSString stringWithFormat:SONG_URL, (unsigned long)self.channelId];
-    NSURL *url = [NSURL URLWithString:urlString];
-    NSURLRequest *request = [NSURLRequest requestWithURL:url];
-    
-    NSURLSessionDataTask *dataTask =
-    [self.session dataTaskWithRequest:request
-                    completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-                        NSDictionary *songsData = [NSJSONSerialization JSONObjectWithData:data
-                                                                                  options:0
-                                                                                    error:nil];
-                        self.songs = songsData[@"song"];
-                        //NSLog(@"%@", self.items);
-                        
-                        if (dataRefreshBlock) {
-                            dataRefreshBlock(self.songs);
-                        }
-                        
-                        if (completionBlock) {
-                            // View related operations must execute in main queue!
-                            dispatch_sync(dispatch_get_main_queue(), ^{
-                                completionBlock();
-                            });
-                        }
-                        
-                        // Preload Album Images
-                        [self preloadImages];
-                    }];
-    [dataTask resume];
-}
-
-- (void)loadWithDataRefreshBlock:(void (^)(NSArray *songArray))dataRefreshBlock
-                 completionBlock:(void (^)())completionBlock {
-    if (self.songs) {
-        if (dataRefreshBlock) dataRefreshBlock(self.songs);
-        if (completionBlock) completionBlock();
-    } else {
-        [self refreshWithDataRefreshBlock:dataRefreshBlock
-                          completionBlock:completionBlock];
-    }
-}
-
-- (void)preloadImages {
-    for (NSDictionary *song in self.songs) {
-        NSString *imgURLString = song[@"picture"];
-        [[ImageStore sharedStore] loadImageByURLString:imgURLString
-                                       completionBlock:nil];
-    }
-}
-
 - (NSDictionary *)getSongByIndex:(NSInteger)index {
     if (index < 0 || index >= [self.songs count]) {
         return nil;

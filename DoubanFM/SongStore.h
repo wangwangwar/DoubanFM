@@ -17,13 +17,8 @@
 + (instancetype)sharedStore;
 
 - (void)changeChannel:(NSUInteger)channelId;
-- (void)refreshWithDataRefreshBlock:(void (^)(NSArray *songArray))dataRefreshBlock
-                    completionBlock:(void (^)())completionBlock;
-// give data using dataRefreshBlock. If having no data, using
-// `refreshWithDataRefreshBlock:completionBlock` to retrieve data and give.
-- (void)loadWithDataRefreshBlock:(void (^)(NSArray *songArray))dataRefreshBlock
-                 completionBlock:(void (^)())completionBlock;
-- (void)preloadImages;
+- (RACSignal *)requestSongListWithChannel:(NSUInteger)channelId;
+
 - (NSDictionary *)getSongByIndex:(NSInteger)index;
 
 @end
