@@ -7,11 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <RACAFNetworking.h>
 
 @interface ImageStore : NSObject
 
 + (instancetype)sharedStore;
-- (void)loadImageByURLString:(NSString *)urlString
-             completionBlock:(void (^)(UIImage *))completionBlock;
+
+// Request image by url string
+//
+// Return a signal of the `UIImage` image data or error.
+- (RACSignal *)requestImageByURLString:(NSString *)urlString;
 
 @end

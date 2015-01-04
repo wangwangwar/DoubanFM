@@ -152,11 +152,12 @@
 }
 
 - (void)setImageByURLString:(NSString *)urlString {
-    [[ImageStore sharedStore] loadImageByURLString:urlString
-                                   completionBlock:^(UIImage *image) {
-                                       _bgImageView.image = [self getBlurredImage:image];
-                                       _albumImageView.image = image;
-                                   }];
+    @weakify(self)
+    [[[ImageStore sharedStore] requestImageByURLString:urlString] subscribeNext:^(UIImage *image) {
+        @strongify(self)
+        _bgImageView.image = [self getBlurredImage:image];
+        _albumImageView.image = image;
+    }];
 }
 
 @end

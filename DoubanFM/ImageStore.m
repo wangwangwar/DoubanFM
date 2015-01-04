@@ -38,27 +38,12 @@
     return self;
 }
 
-#pragma mark - Operations
+#pragma mark - RAC
 
-- (void)loadImageByURLString:(NSString *)urlString
-             completionBlock:(void (^)(UIImage *))completionBlock {
-    if (self.privateImages[urlString]) {
-        if (completionBlock) completionBlock(self.privateImages[urlString]);
-    }
-
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:urlString]];
-    NSURLSessionDataTask *dataTask =
-    [self.session dataTaskWithRequest:request
-                    completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-                        UIImage *image = [UIImage imageWithData:data];
-                        self.privateImages[urlString] = image;
-                        
-                        if (completionBlock) {
-                            completionBlock(image);
-                        }
-                    }
-     ];
-    [dataTask resume];
+- (RACSignal *)requestImageByURLString:(NSString *)urlString {
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    manager.responseSerializer = [[AFImageResponseSerializer alloc] init];
+    return [manager rac_GET:urlString parameters:nil];
 }
 
 #pragma mark - Class Method
